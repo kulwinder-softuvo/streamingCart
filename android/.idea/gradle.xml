@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="testRunner" value="GRADLE" />
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleJvm" value="11" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/app" />
+            <option value="$USER_HOME$/dilpreet/LatestSDK/flutter/.pub-cache/hosted/pub.dartlang.org/agora_chat_sdk-1.0.9/android" />
+            <option value="$USER_HOME$/dilpreet/LatestSDK/flutter/.pub-cache/hosted/pub.dartlang.org/agora_rtc_engine-6.1.0/android" />
+            <option value="$USER_HOME$/dilpreet/LatestSDK/flutter/.pub-cache/hosted/pub.dartlang.org/iris_event-2.0.0/android" />
+            <option value="$USER_HOME$/dilpreet/LatestSDK/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_android-2.0.22/android" />
+            <option value="$USER_HOME$/dilpreet/LatestSDK/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler_android-9.0.2+1/android" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>
