@@ -22,6 +22,8 @@ class GoLiveScreen extends StatelessWidget {
     controller.channelName.value = channelName;
     controller.eventId.value = eventId;
 
+    showDebugPrint("agora token ->  ${controller.streamingToken.value}\n channel name--> ${controller.channelName.value}");
+
   }
 
   @override

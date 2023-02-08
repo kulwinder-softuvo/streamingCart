@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:get/get.dart';
@@ -78,20 +79,61 @@ class EventsRepo extends GetConnect {
     }
   }
 
-  Future<EventDetailModel> getEventDetails(String eventId)async {
+  Future<EventDetailModel> getEventDetails(String eventId) async {
     try {
       final result = await InternetAddress.lookup('google.com');
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-        final response = await get("${
-            APIEndpoints.baseUrl}${APIEndpoints.eventDetail}/$eventId");
+        final response = await get(
+            "${APIEndpoints.baseUrl}${APIEndpoints.eventDetail}/$eventId");
 
         showDebugPrint(
-            "event details api url --->  ${
-                APIEndpoints.baseUrl}${APIEndpoints.eventDetail}/$eventId");
+            "event details api url --->  ${APIEndpoints.baseUrl}${APIEndpoints.eventDetail}/$eventId");
 
         if (response.statusCode == 200) {
           showDebugPrint(
               "get event details response----->  ${response.bodyString}");
+
+          return EventDetailModel.fromJson(response.body);
+        } else {
+          return EventDetailModel(
+              code: response.statusCode, message: somethinWentWrongConst);
+        }
+      } else {
+        return EventDetailModel(code: 502, message: noInternetConnectionConst);
+      }
+    } catch (e) {
+      return EventDetailModel(code: 502, message: noInternetConnectionConst);
+    }
+  }
+
+  getTokenForViewerCount() async {
+    // Customer ID
+    final String customerKey = "18b0d04f892b4e0ebf2c105893d9ea04";
+    // Customer secret
+    final String customerSecret = "3be5ea03c5124928ae056ae57c090c37";
+
+    // Concatenate customer key and customer secret and use base64 to encode the concatenated string
+    String plainCredentials = customerKey + ":" + customerSecret;
+    String base64Credentials = base64.encode(utf8.encode(plainCredentials));
+    // Create authorization header
+    String authorizationHeader = "Basic " + base64Credentials;
+
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        final response =
+            await get("https://api.agora.io/dev/v1/projects", headers: {
+          'Authorization': authorizationHeader,
+          'Content-Type': "application/json"
+        });
+
+        showDebugPrint(
+            "token generation api url --->  https://api.agora.io/dev/v1/projects");
+        showDebugPrint("token authorizationHeader --->  $authorizationHeader");
+
+        if (response.statusCode == 200) {
+          showDebugPrint(
+              "token generation api url----->  ${response.bodyString}");
 
           return EventDetailModel.fromJson(response.body);
         } else {

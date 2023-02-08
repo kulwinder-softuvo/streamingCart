@@ -12,6 +12,7 @@ import '../../common/size_config.dart';
 import '../../constants/string_constants.dart';
 
 class ChatScreen extends StatelessWidget {
+  var sToken, uid;
   var controller = Get.put(ChatController());
 
   @override
@@ -19,7 +20,6 @@ class ChatScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: colorWhite,
       body: Stack(
-        clipBehavior: Clip.none,
         children: [
           Container(
             height: SizeConfig.blockSizeVertical * 31,
@@ -64,6 +64,7 @@ class ChatScreen extends StatelessWidget {
                     suffixIcon: InkWell(
                       onTap: () {
                         controller.sendMessage();
+                        FocusScope.of(context).requestFocus(new FocusNode());
                       },
                       child: Container(
                         width: SizeConfig.blockSizeVertical * 1,
@@ -102,7 +103,7 @@ class ChatScreen extends StatelessWidget {
       child: Row(
         children: [
           headingText(
-              index % 2 == 0 ? chatList.name.toString() : "Neha:",
+              chatList.name.toString(),
               SizeConfig.blockSizeHorizontal * 3.8,
               index % 2 == 0 ? colorYellow : colorRed,
               weight: FontWeight.w600),

@@ -2,6 +2,8 @@ import 'package:agora_chat_sdk/agora_chat_sdk.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:stream_e_cart/constants/storage_constants.dart';
+import 'package:stream_e_cart/constants/string_constants.dart';
 
 import '../../common/widgets.dart';
 import '../../utils/const_utils.dart';
@@ -9,11 +11,11 @@ import '../model/chat_model.dart';
 
 class ChatController extends GetxController {
   final chatController = TextEditingController();
+  final store = GetStorage();
 
   static const String appKey = "61881763#1060324";
   var userId = "".obs;
-  static const String agoraToken =
-      "007eJxTYHi9tT7mduUabakdTH2pmmuLel1cn6dYFG8o/nNAV/9TzD0FBktD87QUS8M001QjQxPL1NREy2RTS6NkAyOTJEtjE3PTDRvuJDcEMjLwSB1iYGRgBWJGBhBfhSHVNNXSxMLQQNfSItFU19AwNUU3Kc0gWdfE1Mw4DWiOgaWpIQCh1yd/";
+  var chatToken = "007eJxTYJi1KWhPuNzSos8tk/5yFj8J7cptMr3w09flb5PF+8JXko0KDJaG5mkploZppqlGhiaWqamJlsmmlkbJBkYmSZbGJuamKS8fJjcEMjJMO7+DlZGBlYERCEF8FYZU01RLEwtDA11Li0RTXUPD1BTdpDSDZF0TUzPjNKA5BpamhgBfNSnH".obs;
 
   ScrollController scrollController = ScrollController();
   final List<String> _logText = [];
@@ -21,7 +23,7 @@ class ChatController extends GetxController {
 
   @override
   void onInit() {
-     initAgoraChatSDK();
+    initAgoraChatSDK();
     signInToAgora();
     addChatListener();
     super.onInit();
@@ -106,12 +108,9 @@ class ChatController extends GetxController {
 
   void signInToAgora() async {
     try {
-      userId.value = generateRandomNum(8, false);
-      showDebugPrint("agora userId is-----------   ${userId.value}");
-
       await ChatClient.getInstance.loginWithAgoraToken(
-       "101",
-        agoraToken,
+        "101",
+        chatToken.value,
       );
       _addLogToConsole("login succeed, userId: ${userId.value}");
     } on ChatError catch (e) {
@@ -130,31 +129,33 @@ class ChatController extends GetxController {
   }
 
   void sendMessage() async {
-    if (userId.value == null || chatController.value.text == null) {
+    if (userId.value == null || chatController.value.text == null || chatController.value.text == "") {
       _addLogToConsole("single chat id or message content is null");
+      showMessage(typeAMessage);
       return;
+    } else {
+      var msg = ChatMessage.createTxtSendMessage(
+        targetId: "101",
+        content: chatController.value.text!,
+      );
+      msg.setMessageStatusCallBack(MessageStatusCallBack(
+        onSuccess: () {
+          _addLogToConsole("send message: ${chatController.value.text}");
+          ChatTextMessageBody body = msg.body as ChatTextMessageBody;
+          chatList.value.add(
+              ChatModel(name: store.read(userName), message: body.content));
+          chatList.refresh();
+          chatController.clear();
+        },
+        onError: (e) {
+          _addLogToConsole(
+            "send message failed, code: ${e.code}, desc: ${e.description}",
+          );
+          showMessage("Message failed \n${e.description}");
+        },
+      ));
+      ChatClient.getInstance.chatManager.sendMessage(msg);
     }
-
-    var msg = ChatMessage.createTxtSendMessage(
-      targetId: "101",
-      content: chatController.value.text!,
-    );
-    msg.setMessageStatusCallBack(MessageStatusCallBack(
-      onSuccess: () {
-        _addLogToConsole("send message: ${chatController.value.text}");
-        ChatTextMessageBody body = msg.body as ChatTextMessageBody;
-        chatList.value.add(ChatModel(name: msg.from, message:  body.content));
-        chatList.refresh();
-        chatController.clear();
-      },
-      onError: (e) {
-        _addLogToConsole(
-          "send message failed, code: ${e.code}, desc: ${e.description}",
-        );
-        showMessage("Message failed \n${e.description}");
-      },
-    ));
-    ChatClient.getInstance.chatManager.sendMessage(msg);
   }
 
   void _addLogToConsole(String log) {

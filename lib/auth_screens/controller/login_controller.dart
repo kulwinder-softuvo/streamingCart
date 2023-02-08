@@ -49,6 +49,7 @@ class LoginController extends GetxController {
           if (value.token != null) {
             storage.write(userToken, value.token!);
             storage.write(userHostId, value.host!.hostId!.toString());
+            storage.write(userName, value.host!.name!.toString());
 
             Get.offAll(() => EventListingScreen());
             showDebugPrint("I am logged in as ${value.host!.name}");

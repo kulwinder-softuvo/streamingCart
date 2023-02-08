@@ -37,6 +37,7 @@ const cancel = "CANCEL";
 const thisEventIsCompleted = "This event is completed.";
 const chatIsNotStartedYet = "Chat is not started yet :(";
 const noProductIsAvailableForSale = "No product is available for sale.";
+const typeAMessage = "Type a message.";
 
 // Font Family
 class FontFamily {

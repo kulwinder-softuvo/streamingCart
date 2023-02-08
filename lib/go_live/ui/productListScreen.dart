@@ -54,19 +54,12 @@ class ProductListScreen extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.all(10),
           child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-            productsList.image.toString() != ""
-                ? Image.network(
-                    productsList.image.toString(),
-                    width: SizeConfig.blockSizeHorizontal * 30,
-                  //  height: SizeConfig.blockSizeVertical * 10,
-                    fit: BoxFit.fill,
-                  )
-                : Image.asset(
-                    dummyProductImage,
-                    width: SizeConfig.blockSizeHorizontal * 30,
-                  //  height: SizeConfig.blockSizeVertical * 10,
-                    fit: BoxFit.fill,
-                  ),
+            FadeInImage.assetNetwork(
+              placeholder: appIcon,
+              image: productsList.image.toString(),
+              width: SizeConfig.blockSizeHorizontal * 30,
+              fit: BoxFit.fill,
+            ),
             SizedBox(
               width: SizeConfig.blockSizeHorizontal * 4,
             ),

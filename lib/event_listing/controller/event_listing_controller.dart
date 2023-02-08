@@ -86,6 +86,7 @@ class EventListingController extends GetxController {
       showLoader.value = false;
       if (value.rtmToken != "") {
         if (value.rtmToken != null) {
+          EventsRepo().getTokenForViewerCount();
           Get.to(() =>
               GoLiveScreen(value.rtcTokenUID.toString(),userId, events.id.toString(), events.channelName.toString()));
         } else {
