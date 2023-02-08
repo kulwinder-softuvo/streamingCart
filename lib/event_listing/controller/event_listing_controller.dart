@@ -81,18 +81,21 @@ class EventListingController extends GetxController {
 
   gotoGoLiveScreen(Events? events) {
     String userId = DateTime.now().microsecondsSinceEpoch.toString();
-
+String audienceToken ="";
     EventsRepo().generateAgoraToken(events!.channelName.toString(), userId, events.id.toString()).then((value) async {
       showLoader.value = false;
       if (value.rtmToken != "") {
         if (value.rtmToken != null) {
-          EventsRepo().getTokenForViewerCount();
+          audienceToken = await EventsRepo().getTokenForViewerCount();
           Get.to(() =>
-              GoLiveScreen(value.rtcTokenUID.toString(),userId, events.id.toString(), events.channelName.toString()));
+              GoLiveScreen(
+                  value.rtcTokenUID.toString(), userId, events.id.toString(),
+                  events.channelName.toString(), audienceToken));
         } else {
           showMessage("Token not found.");
         }
       }
+
     });
   }
 

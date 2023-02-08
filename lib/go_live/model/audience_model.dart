@@ -1,3 +1,5 @@
+import 'package:stream_e_cart/utils/extensions.dart';
+
 class AudienceModel {
   bool? success;
   Data? data;
@@ -38,7 +40,7 @@ class Data {
     mode = json['mode'];
     broadcasters = json['broadcasters'].cast<int>();
     audience = json['audience'].cast<int>();
-    audienceTotal = json['audience_total'];
+    audienceTotal = json['audience_total'].toString().toIntConversion();
   }
 
   Map<String, dynamic> toJson() {

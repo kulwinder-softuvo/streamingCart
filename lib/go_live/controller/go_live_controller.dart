@@ -6,6 +6,7 @@ import 'package:flutter_countdown_timer/countdown_timer_controller.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:stream_e_cart/go_live/go_live_repo.dart';
 import 'package:stream_e_cart/go_live/model/event_details_model.dart';
 import '../../common/widgets.dart';
 import '../../constants/api_endpoints.dart';
@@ -17,6 +18,7 @@ class GoLiveController extends GetxController {
   var channelName = "".obs;
   var streamingToken = "".obs;
   var eventId = "".obs;
+  var audienceToken = "".obs;
   var showLoader = false.obs;
   var uid = "0".obs; // uid of the local user
   var remoteUid = "".obs; // uid of the remote user
@@ -62,14 +64,11 @@ class GoLiveController extends GetxController {
         },
         onUserJoined: (RtcConnection connection, int remoteUid1, int elapsed) {
           debugPrint("remote user $remoteUid1 joined");
-          viewerCount.value = viewerCount.value + 1;
           remoteUid.value = remoteUid.toString();
         },
         onUserOffline: (RtcConnection connection, int remoteUid1,
             UserOfflineReasonType reason) {
           debugPrint("remote user $remoteUid1 left channel");
-          viewerCount.value = viewerCount.value - 1;
-
           remoteUid.value = "";
         },
         onTokenPrivilegeWillExpire: (RtcConnection connection, String token) {
@@ -95,6 +94,7 @@ class GoLiveController extends GetxController {
       uid: 0,
       options: options,
     );
+      getAudienceCountApi();
   }
 
   void leave() {
@@ -120,6 +120,22 @@ class GoLiveController extends GetxController {
     );
   }
 
+  void getAudienceCountApi() {
 
+    GoLiveRepo().getTotalAudienceCount(channelName.value, audienceToken.value).then((value) async {
+
+      if (value.success == true) {
+        if (value.data != null) {
+          viewerCount.value = int.parse(value.data!.audienceTotal.toString());
+
+          Future.delayed(Duration(seconds: 10), () {
+            getAudienceCountApi();
+          });
+        }
+      } else {
+        return;
+      }
+    });
+  }
 
 }

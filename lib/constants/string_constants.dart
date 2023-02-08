@@ -35,6 +35,7 @@ const areYouSureToLogotFromApp = "Are you sure to logout from the app?";
 const ok = "OK";
 const cancel = "CANCEL";
 const thisEventIsCompleted = "This event is completed.";
+const thisEventIsNotLiveNow = "This event is not live now.";
 const chatIsNotStartedYet = "Chat is not started yet :(";
 const noProductIsAvailableForSale = "No product is available for sale.";
 const typeAMessage = "Type a message.";

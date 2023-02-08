@@ -21,34 +21,36 @@ class EventListingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        key: _key,
-        appBar: appBar(context, _key, broadcastYourShows),
-       // drawer: drawerLayout(context),
-        backgroundColor: colorWhite,
-        body: Obx (() => controller.showLoader.value == false ? SmartRefresher(
-          enablePullDown: true,
-          enablePullUp: false,
-          header: const WaterDropHeader(waterDropColor: colorRed),
-          controller: controller.refreshController,
-          onRefresh: () {
-            FocusManager.instance.primaryFocus?.unfocus();
-            controller.eventListDetails(fromRefresh: true);
-          },
-          child: SingleChildScrollView(
-            child: Container(
-              margin: EdgeInsets.only(left: 15, right: 15),
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: SizeConfig.blockSizeVertical,
-                  ),
-                  normalText(showsDescription,
-                      SizeConfig.blockSizeHorizontal * 3.8, colorGrey,
-                      alignment: TextAlign.start),
-                  SizedBox(
-                    height: SizeConfig.blockSizeVertical * 3,
-                  ),
-             /*     InkWell(
+          key: _key,
+          appBar: appBar(context, _key, broadcastYourShows),
+          // drawer: drawerLayout(context),
+          backgroundColor: colorWhite,
+          body: Obx(
+            () => controller.showLoader.value == false
+                ? SmartRefresher(
+                    enablePullDown: true,
+                    enablePullUp: false,
+                    header: const WaterDropHeader(waterDropColor: colorRed),
+                    controller: controller.refreshController,
+                    onRefresh: () {
+                      FocusManager.instance.primaryFocus?.unfocus();
+                      controller.eventListDetails(fromRefresh: true);
+                    },
+                    child: SingleChildScrollView(
+                      child: Container(
+                        margin: EdgeInsets.only(left: 15, right: 15),
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: SizeConfig.blockSizeVertical,
+                            ),
+                            normalText(showsDescription,
+                                SizeConfig.blockSizeHorizontal * 3.8, colorGrey,
+                                alignment: TextAlign.start),
+                            SizedBox(
+                              height: SizeConfig.blockSizeVertical * 3,
+                            ),
+                            /*     InkWell(
                     onTap: () {
                       Get.to(() => JoinChannelScreen());
                     },
@@ -66,23 +68,24 @@ class EventListingScreen extends StatelessWidget {
                       ),
                     ),
                   ),*/
-                  Obx(() => ListView.builder(
-                        itemCount: controller.eventList.length,
-                        scrollDirection: Axis.vertical,
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        primary: false,
-                        itemBuilder: (context, index) {
-                          return showRowItem(
-                              controller.eventList[index], index);
-                        },
-                      )),
-                ],
-              ),
-            ),
-          ),
-        ) : commonLoader(),)
-      ),
+                            Obx(() => ListView.builder(
+                                  itemCount: controller.eventList.length,
+                                  scrollDirection: Axis.vertical,
+                                  shrinkWrap: true,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  primary: false,
+                                  itemBuilder: (context, index) {
+                                    return showRowItem(
+                                        controller.eventList[index], index);
+                                  },
+                                )),
+                          ],
+                        ),
+                      ),
+                    ),
+                  )
+                : commonLoader(),
+          )),
     );
   }
 
@@ -190,7 +193,12 @@ class EventListingScreen extends StatelessWidget {
                                 eventList.eventEndTime.toString()) ==
                             completed
                         ? showMessage(thisEventIsCompleted)
-                        : controller.gotoGoLiveScreen(eventList);
+                        : controller.compareDatesForEventStatus(
+                                    eventList.eventStartTime.toString(),
+                                    eventList.eventEndTime.toString()) ==
+                                upcoming
+                            ? showMessage(thisEventIsNotLiveNow)
+                            : controller.gotoGoLiveScreen(eventList);
                   },
                   style: ElevatedButton.styleFrom(
                     primary: controller.compareDatesForEventStatus(

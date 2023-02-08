@@ -106,7 +106,7 @@ class EventsRepo extends GetConnect {
     }
   }
 
-  getTokenForViewerCount() async {
+  Future<String> getTokenForViewerCount() async {
     // Customer ID
     final String customerKey = "18b0d04f892b4e0ebf2c105893d9ea04";
     // Customer secret
@@ -135,16 +135,16 @@ class EventsRepo extends GetConnect {
           showDebugPrint(
               "token generation api url----->  ${response.bodyString}");
 
-          return EventDetailModel.fromJson(response.body);
+          return authorizationHeader;
         } else {
-          return EventDetailModel(
-              code: response.statusCode, message: somethinWentWrongConst);
+          return authorizationHeader;
         }
       } else {
-        return EventDetailModel(code: 502, message: noInternetConnectionConst);
+        return authorizationHeader;
       }
     } catch (e) {
-      return EventDetailModel(code: 502, message: noInternetConnectionConst);
+      return authorizationHeader;
     }
   }
+
 }

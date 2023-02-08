@@ -16,11 +16,12 @@ import '../../constants/string_constants.dart';
 class GoLiveScreen extends StatelessWidget {
   var controller = Get.put(GoLiveController());
 
-  GoLiveScreen(String token, String userId, String eventId, String channelName) {
+  GoLiveScreen(String token, String userId, String eventId, String channelName, String audienceToken) {
     controller.streamingToken.value = token;
     controller.uid.value = userId;
     controller.channelName.value = channelName;
     controller.eventId.value = eventId;
+    controller.audienceToken.value = audienceToken;
 
     showDebugPrint("agora token ->  ${controller.streamingToken.value}\n channel name--> ${controller.channelName.value}");
 
