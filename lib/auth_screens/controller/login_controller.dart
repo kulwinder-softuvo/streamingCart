@@ -16,6 +16,14 @@ class LoginController extends GetxController {
   var showLoader = false.obs;
   final storage = GetStorage();
 
+  @override
+  void onInit() {
+    hostIdController.value.text = "HOST802440";
+    emailController.value.text = "kulwinder12@yopmail.com";
+    passwordController.value.text = "123456";
+    super.onInit();
+  }
+
   bool isValidEmail(String? value) {
     if (value != null) {
       return RegExp(
@@ -44,7 +52,7 @@ class LoginController extends GetxController {
               controller: this)
           .then((value) async {
         showLoader.value = false;
-        showDebugPrint("user token => ${value.token}");
+
         if (value.code == 200) {
           if (value.token != null) {
             storage.write(userToken, value.token!);
@@ -52,7 +60,6 @@ class LoginController extends GetxController {
             storage.write(userName, value.host!.name!.toString());
 
             Get.offAll(() => EventListingScreen());
-            showDebugPrint("I am logged in as ${value.host!.name}");
             showDebugPrint(
                 "user token is after login ---> ${storage.read(userToken)}");
             showMessage(

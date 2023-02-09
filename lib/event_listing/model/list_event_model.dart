@@ -74,8 +74,8 @@ class Events {
     hostId = json['host_id'].toString().toStringConversion();
     businessId = json['business_id'].toString().toIntConversion();
     createdById = json['created_by_id'].toString().toIntConversion();
-    videoLink = json['video_link'].toString().toStringConversion() ?? "";
-    channelName = json['channel_name'].toString().toStringConversion() ?? "";
+    videoLink = json['video_link'].toString().toStringConversion();
+    channelName = json['channel_name'].toString().toStringConversion();
     bannerImage = json['banner_image'].toString().toStringConversion();
     status = json['status'].toString().toIntConversion();
     isPublished = json['is_published'].toString().toIntConversion();

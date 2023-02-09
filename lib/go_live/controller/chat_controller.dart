@@ -2,8 +2,10 @@ import 'package:agora_chat_sdk/agora_chat_sdk.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:stream_e_cart/constants/api_endpoints.dart';
 import 'package:stream_e_cart/constants/storage_constants.dart';
 import 'package:stream_e_cart/constants/string_constants.dart';
+import 'package:stream_e_cart/go_live/go_live_repo.dart';
 
 import '../../common/widgets.dart';
 import '../../utils/const_utils.dart';
@@ -13,9 +15,9 @@ class ChatController extends GetxController {
   final chatController = TextEditingController();
   final store = GetStorage();
 
-  static const String appKey = "61881763#1060324";
   var userId = "".obs;
-  var chatToken = "007eJxTYJi1KWhPuNzSos8tk/5yFj8J7cptMr3w09flb5PF+8JXko0KDJaG5mkploZppqlGhiaWqamJlsmmlkbJBkYmSZbGJuamKS8fJjcEMjJMO7+DlZGBlYERCEF8FYZU01RLEwtDA11Li0RTXUPD1BTdpDSDZF0TUzPjNKA5BpamhgBfNSnH".obs;
+  var chatToken = "".obs;
+  var agoraAppChatToken = "".obs;
 
   ScrollController scrollController = ScrollController();
   final List<String> _logText = [];
@@ -23,15 +25,14 @@ class ChatController extends GetxController {
 
   @override
   void onInit() {
+    getChatTokenApi(userId.value);
     initAgoraChatSDK();
-    signInToAgora();
-    addChatListener();
     super.onInit();
   }
 
   void initAgoraChatSDK() async {
     ChatOptions options = ChatOptions(
-      appKey: appKey,
+      appKey: APIEndpoints.agoraAppKey,
       autoLogin: false,
     );
     await ChatClient.getInstance.init(options);
@@ -107,14 +108,17 @@ class ChatController extends GetxController {
   }
 
   void signInToAgora() async {
+    userId.value = store.read(agoraChatUserId);
+
     try {
       await ChatClient.getInstance.loginWithAgoraToken(
-        "101",
+        userId.value,
         chatToken.value,
       );
       _addLogToConsole("login succeed, userId: ${userId.value}");
     } on ChatError catch (e) {
       _addLogToConsole("login failed, code: ${e.code}, desc: ${e.description}");
+      getAgoraRegisterApi(agoraAppChatToken.value, userId.value);
     }
   }
 
@@ -135,8 +139,8 @@ class ChatController extends GetxController {
       return;
     } else {
       var msg = ChatMessage.createTxtSendMessage(
-        targetId: "101",
-        content: chatController.value.text!,
+        targetId: userId.value,
+        content: chatController.value.text,
       );
       msg.setMessageStatusCallBack(MessageStatusCallBack(
         onSuccess: () {
@@ -168,4 +172,38 @@ class ChatController extends GetxController {
   String get _timeString {
     return DateTime.now().toString().split(".").first;
   }
+
+  void getChatTokenApi(String userId) {
+    GoLiveRepo().getChatToken(userId).then((value) async {
+      if (value.userToken != "") {
+        chatToken.value = value.userToken.toString();
+        agoraAppChatToken.value = value.appToken.toString();
+
+        signInToAgora();
+        addChatListener();
+
+      } else {
+        return;
+      }
+    });
+  }
+
+ void getAgoraRegisterApi(String appToken, String userId) {
+    GoLiveRepo().agoraRegisterUser(appToken, userId).then((value) async {
+      if (value.applicationName != "") {
+        try {
+          await ChatClient.getInstance.loginWithAgoraToken(
+           userId,
+            chatToken.value,
+          );
+          _addLogToConsole("login succeed, userId: ${userId}");
+        } on ChatError catch (e) {
+          _addLogToConsole("login failed, code: ${e.code}, desc: ${e.description}");
+        }
+      } else {
+        return;
+      }
+    });
+  }
+
 }

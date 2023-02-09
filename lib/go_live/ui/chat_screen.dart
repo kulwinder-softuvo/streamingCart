@@ -12,7 +12,6 @@ import '../../common/size_config.dart';
 import '../../constants/string_constants.dart';
 
 class ChatScreen extends StatelessWidget {
-  var sToken, uid;
   var controller = Get.put(ChatController());
 
   @override
@@ -46,7 +45,7 @@ class ChatScreen extends StatelessWidget {
                   borderRadius: BorderRadius.all(
                     Radius.circular(50.0),
                   )),
-              margin: EdgeInsets.only(left: 15.0, right: 15.0, bottom: 10),
+              margin: EdgeInsets.only(left: 15.0, right: 15.0, bottom: 10  ),
               child: Padding(
                 padding: const EdgeInsets.all(4.0),
                 child: TextFormField(

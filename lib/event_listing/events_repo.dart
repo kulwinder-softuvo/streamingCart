@@ -107,15 +107,10 @@ class EventsRepo extends GetConnect {
   }
 
   Future<String> getTokenForViewerCount() async {
-    // Customer ID
-    final String customerKey = "18b0d04f892b4e0ebf2c105893d9ea04";
-    // Customer secret
-    final String customerSecret = "3be5ea03c5124928ae056ae57c090c37";
 
-    // Concatenate customer key and customer secret and use base64 to encode the concatenated string
-    String plainCredentials = customerKey + ":" + customerSecret;
+    String plainCredentials = APIEndpoints.agoraCustomerKey + ":" + APIEndpoints.agoraCustomerSecretKey;
     String base64Credentials = base64.encode(utf8.encode(plainCredentials));
-    // Create authorization header
+
     String authorizationHeader = "Basic " + base64Credentials;
 
     try {

@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:stream_e_cart/auth_screens/ui/login_screen.dart';
 import 'package:stream_e_cart/constants/api_endpoints.dart';
+import 'package:stream_e_cart/constants/storage_constants.dart';
 import 'package:stream_e_cart/constants/string_constants.dart';
 import 'package:stream_e_cart/event_listing/model/agora_token_generator_model.dart';
 import 'package:stream_e_cart/go_live/ui/go_live_screen.dart';
@@ -80,7 +81,14 @@ class EventListingController extends GetxController {
   }
 
   gotoGoLiveScreen(Events? events) {
-    String userId = DateTime.now().microsecondsSinceEpoch.toString();
+    String userId = "";
+    if(store.read(agoraChatUserId) != "" && store.read(agoraChatUserId) != null){
+      userId = store.read(agoraChatUserId);
+    }else{
+       userId = DateTime.now().microsecondsSinceEpoch.toString();
+       store.write(agoraChatUserId, userId) ;
+    }
+
 String audienceToken ="";
     EventsRepo().generateAgoraToken(events!.channelName.toString(), userId, events.id.toString()).then((value) async {
       showLoader.value = false;

@@ -50,24 +50,6 @@ class EventListingScreen extends StatelessWidget {
                             SizedBox(
                               height: SizeConfig.blockSizeVertical * 3,
                             ),
-                            /*     InkWell(
-                    onTap: () {
-                      Get.to(() => JoinChannelScreen());
-                    },
-                    child: Container(
-                      width: SizeConfig.blockSizeHorizontal * 13,
-                      height: SizeConfig.blockSizeVertical * 4,
-                      decoration: BoxDecoration(
-                        color: colorRed,
-                        borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                      ),
-                      child: Center(
-                        child: headingText("join",
-                            SizeConfig.blockSizeHorizontal * 3.8, colorWhite,
-                            weight: FontWeight.w500),
-                      ),
-                    ),
-                  ),*/
                             Obx(() => ListView.builder(
                                   itemCount: controller.eventList.length,
                                   scrollDirection: Axis.vertical,
@@ -157,8 +139,7 @@ class EventListingScreen extends StatelessWidget {
                             weight: FontWeight.w600),
                         headingText(
                             controller.formatEventDate(
-                                    eventList.eventStartTime.toString()) ??
-                                "",
+                                    eventList.eventStartTime.toString()),
                             SizeConfig.blockSizeHorizontal * 2.9,
                             colorWhite,
                             weight: FontWeight.w600),
@@ -170,8 +151,7 @@ class EventListingScreen extends StatelessWidget {
                             weight: FontWeight.w600),
                         headingText(
                             controller.formatEventDate(
-                                    eventList.eventEndTime.toString()) ??
-                                "",
+                                    eventList.eventEndTime.toString()),
                             SizeConfig.blockSizeHorizontal * 2.9,
                             colorWhite,
                             weight: FontWeight.w600),
