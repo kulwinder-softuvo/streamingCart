@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:stream_e_cart/utils/extensions.dart';
 
 class ChatTokenModel {
@@ -14,9 +12,9 @@ class ChatTokenModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['userToken'] = this.userToken;
-    data['appToken'] = this.appToken;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['userToken'] = userToken;
+    data['appToken'] = appToken;
     return data;
   }
 }

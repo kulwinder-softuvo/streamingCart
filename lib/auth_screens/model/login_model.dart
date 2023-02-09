@@ -15,17 +15,17 @@ class LoginModel {
     code = json['code'].toString().toIntConversion();
     status = json['status'].toString().toStringConversion();
     message = json['message'].toString().toStringConversion();
-    host = json['host'] != null ? new Host.fromJson(json['host']) : null;
+    host = json['host'] != null ? Host.fromJson(json['host']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['token'] = this.token;
-    data['code'] = this.code;
-    data['status'] = this.status;
-    data['message'] = this.message;
-    if (this.host != null) {
-      data['host'] = this.host!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['token'] = token;
+    data['code'] = code;
+    data['status'] = status;
+    data['message'] = message;
+    if (host != null) {
+      data['host'] = host!.toJson();
     }
     return data;
   }
@@ -66,16 +66,16 @@ class Host {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['host_id'] = this.hostId;
-    data['email'] = this.email;
-    data['password'] = this.password;
-    data['business_id'] = this.businessId;
-    data['created_by_id'] = this.createdById;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['host_id'] = hostId;
+    data['email'] = email;
+    data['password'] = password;
+    data['business_id'] = businessId;
+    data['created_by_id'] = createdById;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
     return data;
   }
 }

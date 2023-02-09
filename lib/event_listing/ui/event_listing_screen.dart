@@ -1,21 +1,21 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:stream_e_cart/common/widgets.dart';
 import 'package:stream_e_cart/constants/api_endpoints.dart';
 import 'package:stream_e_cart/constants/app_colors.dart';
-import 'package:stream_e_cart/constants/app_images.dart';
 import 'package:stream_e_cart/constants/string_constants.dart';
 
 import '../../common/size_config.dart';
-import '../../go_live/ui/go_live_screen.dart';
 import '../controller/event_listing_controller.dart';
 import '../model/list_event_model.dart';
 
+// ignore: must_be_immutable
 class EventListingScreen extends StatelessWidget {
   var controller = Get.put(EventListingController());
-  GlobalKey<ScaffoldState> _key = GlobalKey();
+  final GlobalKey<ScaffoldState> _key = GlobalKey();
+
+  EventListingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,7 @@ class EventListingScreen extends StatelessWidget {
                     },
                     child: SingleChildScrollView(
                       child: Container(
-                        margin: EdgeInsets.only(left: 15, right: 15),
+                        margin: const EdgeInsets.only(left: 15, right: 15),
                         child: Column(
                           children: [
                             SizedBox(
@@ -86,12 +86,12 @@ class EventListingScreen extends StatelessWidget {
               height: SizeConfig.blockSizeVertical * 31,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                    colorFilter: new ColorFilter.mode(
+                    colorFilter: ColorFilter.mode(
                         Colors.black.withOpacity(0.4), BlendMode.darken),
                     image: NetworkImage(
                         "${APIEndpoints.imageBaseUrl}${eventList.bannerImage}"),
                     fit: BoxFit.cover),
-                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                borderRadius: const BorderRadius.all(Radius.circular(10.0)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -102,11 +102,11 @@ class EventListingScreen extends StatelessWidget {
                   Container(
                     width: SizeConfig.blockSizeHorizontal * 23,
                     height: SizeConfig.blockSizeVertical * 4,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                         color: colorRed,
                         borderRadius: BorderRadius.only(
-                          bottomRight: const Radius.circular(5.0),
-                          topRight: const Radius.circular(5.0),
+                          bottomRight: Radius.circular(5.0),
+                          topRight: Radius.circular(5.0),
                         )),
                     child: Center(
                       child: headingText(
@@ -122,7 +122,7 @@ class EventListingScreen extends StatelessWidget {
                     height: SizeConfig.blockSizeVertical * 16,
                   ),
                   Container(
-                    margin: EdgeInsets.only(left: 15),
+                    margin: const EdgeInsets.only(left: 15),
                     child: headingText(eventList.title.toString(),
                         SizeConfig.blockSizeHorizontal * 4.2, colorWhite,
                         weight: FontWeight.w600),
@@ -131,7 +131,7 @@ class EventListingScreen extends StatelessWidget {
                     height: SizeConfig.blockSizeVertical,
                   ),
                   Container(
-                    margin: EdgeInsets.only(left: 15),
+                    margin: const EdgeInsets.only(left: 15),
                     child: Row(
                       children: [
                         headingText(start, SizeConfig.blockSizeHorizontal * 2.9,
@@ -181,7 +181,7 @@ class EventListingScreen extends StatelessWidget {
                             : controller.gotoGoLiveScreen(eventList);
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: controller.compareDatesForEventStatus(
+                    backgroundColor: controller.compareDatesForEventStatus(
                                 eventList.eventStartTime.toString(),
                                 eventList.eventEndTime.toString()) ==
                             completed
@@ -192,7 +192,7 @@ class EventListingScreen extends StatelessWidget {
                     ),
                     elevation: 15.0,
                   ),
-                  child: Container(
+                  child: SizedBox(
                       width: SizeConfig.screenWidth / 1.7,
                       height: SizeConfig.blockSizeVertical * 6,
                       child: Center(

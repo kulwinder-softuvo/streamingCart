@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:stream_e_cart/common/widgets.dart';
 import 'package:stream_e_cart/constants/app_colors.dart';
 import 'package:stream_e_cart/constants/app_images.dart';
@@ -11,8 +9,11 @@ import 'package:stream_e_cart/go_live/model/chat_model.dart';
 import '../../common/size_config.dart';
 import '../../constants/string_constants.dart';
 
+// ignore: must_be_immutable
 class ChatScreen extends StatelessWidget {
   var controller = Get.put(ChatController());
+
+  ChatScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,32 +21,30 @@ class ChatScreen extends StatelessWidget {
       backgroundColor: colorWhite,
       body: Stack(
         children: [
-          Container(
+          SizedBox(
             height: SizeConfig.blockSizeVertical * 31,
-            child: Obx (() => controller.chatList.length >0 ? ListView.builder(
+            child: Obx (() => controller.chatList.isNotEmpty ? ListView.builder(
               itemCount: controller.chatList.length,
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
               primary: false,
               itemBuilder: (context, index) {
-                return chatRowItem(controller.chatList.value[index], index);
+                return chatRowItem(controller.chatList[index], index);
               },
-            ) : Container(
-              child: Center(
-                child: headingText(chatIsNotStartedYet ,   SizeConfig.blockSizeHorizontal * 4, colorGrey, weight: FontWeight.w500),
-              ),
+            ) : Center(
+              child: headingText(chatIsNotStartedYet ,   SizeConfig.blockSizeHorizontal * 4, colorGrey, weight: FontWeight.w500),
             ),
           ),),
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
               height: SizeConfig.blockSizeVertical * 6.5,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   color: colorLightGreyBg,
                   borderRadius: BorderRadius.all(
                     Radius.circular(50.0),
                   )),
-              margin: EdgeInsets.only(left: 15.0, right: 15.0, bottom: 10  ),
+              margin: const EdgeInsets.only(left: 15.0, right: 15.0, bottom: 10  ),
               child: Padding(
                 padding: const EdgeInsets.all(4.0),
                 child: TextFormField(
@@ -56,22 +55,22 @@ class ChatScreen extends StatelessWidget {
                   style: const TextStyle(color: colorBlack),
                   decoration: InputDecoration(
                     hintText: typeHere,
-                    hintStyle: TextStyle(color: colorGrey),
+                    hintStyle: const TextStyle(color: colorGrey),
                     filled: true,
                     border: InputBorder.none,
                     fillColor: Colors.transparent,
                     suffixIcon: InkWell(
                       onTap: () {
                         controller.sendMessage();
-                        FocusScope.of(context).requestFocus(new FocusNode());
+                        FocusScope.of(context).requestFocus(FocusNode());
                       },
                       child: Container(
                         width: SizeConfig.blockSizeVertical * 1,
                         height: SizeConfig.blockSizeVertical * 1,
-                        margin: EdgeInsets.all(5),
-                        decoration: new BoxDecoration(
-                          image: new DecorationImage(
-                            image: new AssetImage(greyCircle),
+                        margin: const EdgeInsets.all(5),
+                        decoration: const BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage(greyCircle),
                             fit: BoxFit.fill,
                           ),
                         ),

@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stream_e_cart/auth_screens/ui/login_screen.dart';
 import 'package:stream_e_cart/common/size_config.dart';
 import 'package:stream_e_cart/common/widgets.dart';
 import 'package:stream_e_cart/constants/app_colors.dart';
@@ -10,8 +8,11 @@ import 'package:stream_e_cart/constants/string_constants.dart';
 
 import '../controller/first_screen_controller.dart';
 
+// ignore: must_be_immutable
 class FirstScreen extends StatelessWidget {
   var controller = Get.put(FirstScreencontroller());
+
+  FirstScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -36,7 +37,7 @@ class FirstScreen extends StatelessWidget {
                   height: SizeConfig.blockSizeVertical * 2,
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 20, right: 20),
+                  padding: const EdgeInsets.only(left: 20, right: 20),
                   child: normalText(firstScreenDescription,
                       SizeConfig.blockSizeHorizontal * 3.8, colorGrey),
                 ),
@@ -48,13 +49,13 @@ class FirstScreen extends StatelessWidget {
                       controller.goLiveBtnClick();
                     },
                     style: ElevatedButton.styleFrom(
-                      primary: colorRed,
+                      backgroundColor: colorRed,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
                       elevation: 15.0,
                     ),
-                    child: Container(
+                    child: SizedBox(
                         width: SizeConfig.screenWidth / 1.5,
                         height: SizeConfig.blockSizeVertical * 6,
                         child: Center(

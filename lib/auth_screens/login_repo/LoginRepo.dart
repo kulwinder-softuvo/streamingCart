@@ -9,7 +9,7 @@ import '../../constants/api_endpoints.dart';
 import '../../constants/storage_constants.dart';
 import '../../constants/string_constants.dart';
 import '../controller/login_controller.dart';
-import '../model/LoginModel.dart';
+import '../model/login_model.dart';
 
 class LoginRepo extends GetConnect {
   final store = GetStorage();
@@ -36,7 +36,7 @@ class LoginRepo extends GetConnect {
           return LoginModel.fromJson(response.body);
         } else {
           return LoginModel(
-              code: response.statusCode, message: somethinWentWrongConst);
+              code: response.statusCode, message: somethingWentWrongConst);
         }
       } else {
         return LoginModel(code: 502, message: noInternetConnectionConst);
@@ -63,7 +63,7 @@ class LoginRepo extends GetConnect {
 
           return DefaultModel.fromJson(response.body);
         } else {
-          return DefaultModel(success: false, message: somethinWentWrongConst);
+          return DefaultModel(success: false, message: somethingWentWrongConst);
         }
       } else {
         return DefaultModel(success: false, message: noInternetConnectionConst);

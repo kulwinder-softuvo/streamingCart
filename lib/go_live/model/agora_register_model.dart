@@ -10,15 +10,15 @@ class AgoraRegisterModel {
   String? applicationName;
 
   AgoraRegisterModel(
-      {this.path,
-        this.uri,
-        this.timestamp,
-        this.organization,
-        this.application,
-        this.entities,
-        this.action,
-        this.duration,
-        this.applicationName});
+      {path,
+        uri,
+        timestamp,
+        organization,
+        application,
+        entities,
+        action,
+        duration,
+        applicationName});
 
   AgoraRegisterModel.fromJson(Map<String, dynamic> json) {
     path = json['path'];
@@ -29,7 +29,7 @@ class AgoraRegisterModel {
     if (json['entities'] != null) {
       entities = <Entities>[];
       json['entities'].forEach((v) {
-        entities!.add(new Entities.fromJson(v));
+        entities!.add(Entities.fromJson(v));
       });
     }
     action = json['action'];
@@ -38,18 +38,18 @@ class AgoraRegisterModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['path'] = this.path;
-    data['uri'] = this.uri;
-    data['timestamp'] = this.timestamp;
-    data['organization'] = this.organization;
-    data['application'] = this.application;
-    if (this.entities != null) {
-      data['entities'] = this.entities!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['path'] = path;
+    data['uri'] = uri;
+    data['timestamp'] = timestamp;
+    data['organization'] = organization;
+    data['application'] = application;
+    if (entities != null) {
+      data['entities'] = entities!.map((v) => v.toJson()).toList();
     }
-    data['action'] = this.action;
-    data['duration'] = this.duration;
-    data['applicationName'] = this.applicationName;
+    data['action'] = action;
+    data['duration'] = duration;
+    data['applicationName'] = applicationName;
     return data;
   }
 }
@@ -64,13 +64,13 @@ class Entities {
   String? nickname;
 
   Entities(
-      {this.uuid,
-        this.type,
-        this.created,
-        this.modified,
-        this.username,
-        this.activated,
-        this.nickname});
+      {uuid,
+        type,
+        created,
+        modified,
+        username,
+        activated,
+        nickname});
 
   Entities.fromJson(Map<String, dynamic> json) {
     uuid = json['uuid'];
@@ -83,14 +83,14 @@ class Entities {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['uuid'] = this.uuid;
-    data['type'] = this.type;
-    data['created'] = this.created;
-    data['modified'] = this.modified;
-    data['username'] = this.username;
-    data['activated'] = this.activated;
-    data['nickname'] = this.nickname;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['uuid'] = uuid;
+    data['type'] = type;
+    data['created'] = created;
+    data['modified'] = modified;
+    data['username'] = username;
+    data['activated'] = activated;
+    data['nickname'] = nickname;
     return data;
   }
 }

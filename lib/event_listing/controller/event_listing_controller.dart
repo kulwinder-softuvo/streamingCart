@@ -1,19 +1,13 @@
-import 'dart:io';
-
-import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:stream_e_cart/auth_screens/ui/login_screen.dart';
-import 'package:stream_e_cart/constants/api_endpoints.dart';
 import 'package:stream_e_cart/constants/storage_constants.dart';
 import 'package:stream_e_cart/constants/string_constants.dart';
-import 'package:stream_e_cart/event_listing/model/agora_token_generator_model.dart';
 import 'package:stream_e_cart/go_live/ui/go_live_screen.dart';
 
 import '../../auth_screens/login_repo/LoginRepo.dart';
-import '../../common/size_config.dart';
 import '../../common/widgets.dart';
 import '../events_repo.dart';
 import '../model/list_event_model.dart';
@@ -109,8 +103,7 @@ String audienceToken ="";
 
   void logoutClick() {
     LoginRepo().logoutUser().then((value) {
-      if (value != null) {
-        if (value.success == true) {
+      if (value.success == true) {
           store.erase();
           Get.offAll(() => LoginScreen());
           showMessage(value.message.toString());
@@ -118,10 +111,8 @@ String audienceToken ="";
         } else {
           showMessage(value.message ?? "");
         }
-      } else {
-        showMessage(value.message ?? "");
       }
-    });
+    );
   }
 
 

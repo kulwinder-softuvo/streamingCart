@@ -9,12 +9,12 @@ class EventDetailModel {
 
   EventDetailModel.fromJson(Map<String, dynamic> json) {
     code = json['code'].toString().toIntConversion();
-    data = json['data'] != null ? new EventDetail.fromJson(json['data']) : null;
+    data = json['data'] != null ? EventDetail.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['code'] = this.code;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['code'] = code;
     if (this.data != null) {
       data['data'] = this.data!.toJson();
     }
@@ -39,19 +39,19 @@ class EventDetail {
     if (json['products'] != null) {
       products = <Products>[];
       json['products'].forEach((v) {
-        products!.add(new Products.fromJson(v));
+        products!.add(Products.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['title'] = this.title;
-    data['event_desc'] = this.eventDesc;
-    data['channel_name'] = this.channelName;
-    if (this.products != null) {
-      data['products'] = this.products!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['title'] = title;
+    data['event_desc'] = eventDesc;
+    data['channel_name'] = channelName;
+    if (products != null) {
+      data['products'] = products!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -75,12 +75,12 @@ class Products {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['title'] = this.title;
-    data['url'] = this.url;
-    data['price'] = this.price;
-    data['image'] = this.image;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['title'] = title;
+    data['url'] = url;
+    data['price'] = price;
+    data['image'] = image;
     return data;
   }
 }

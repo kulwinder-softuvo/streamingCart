@@ -38,7 +38,7 @@ class EventsRepo extends GetConnect {
           return ListEventModel.fromJson(response.body);
         } else {
           return ListEventModel(
-              code: response.statusCode, message: somethinWentWrongConst);
+              code: response.statusCode, message: somethingWentWrongConst);
         }
       } else {
         return ListEventModel(code: 502, message: noInternetConnectionConst);
@@ -65,9 +65,6 @@ class EventsRepo extends GetConnect {
       if (response.statusCode == 200) {
         showDebugPrint(
             "get agora token response----->  ${response.bodyString}");
-
-        AgoraTokenGeneratorModel model = AgoraTokenGeneratorModel();
-
         return AgoraTokenGeneratorModel.fromJson(response.body);
       } else {
         return AgoraTokenGeneratorModel(
@@ -96,7 +93,7 @@ class EventsRepo extends GetConnect {
           return EventDetailModel.fromJson(response.body);
         } else {
           return EventDetailModel(
-              code: response.statusCode, message: somethinWentWrongConst);
+              code: response.statusCode, message: somethingWentWrongConst);
         }
       } else {
         return EventDetailModel(code: 502, message: noInternetConnectionConst);
@@ -108,10 +105,10 @@ class EventsRepo extends GetConnect {
 
   Future<String> getTokenForViewerCount() async {
 
-    String plainCredentials = APIEndpoints.agoraCustomerKey + ":" + APIEndpoints.agoraCustomerSecretKey;
+    String plainCredentials = "${APIEndpoints.agoraCustomerKey}:${APIEndpoints.agoraCustomerSecretKey}";
     String base64Credentials = base64.encode(utf8.encode(plainCredentials));
 
-    String authorizationHeader = "Basic " + base64Credentials;
+    String authorizationHeader = "Basic $base64Credentials";
 
     try {
       final result = await InternetAddress.lookup('google.com');
@@ -141,5 +138,4 @@ class EventsRepo extends GetConnect {
       return authorizationHeader;
     }
   }
-
 }

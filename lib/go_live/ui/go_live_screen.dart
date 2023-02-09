@@ -1,9 +1,7 @@
 import 'package:agora_rtc_engine/agora_rtc_engine.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_countdown_timer/index.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:stream_e_cart/common/size_config.dart';
 import 'package:stream_e_cart/constants/app_colors.dart';
 import 'package:stream_e_cart/constants/app_images.dart';
@@ -13,10 +11,11 @@ import 'package:stream_e_cart/go_live/ui/productListScreen.dart';
 import '../../common/widgets.dart';
 import '../../constants/string_constants.dart';
 
+// ignore: must_be_immutable
 class GoLiveScreen extends StatelessWidget {
   var controller = Get.put(GoLiveController());
 
-  GoLiveScreen(String token, String userId, String eventId, String channelName, String audienceToken) {
+  GoLiveScreen(String token, String userId, String eventId, String channelName, String audienceToken, {super.key}) {
     controller.streamingToken.value = token;
     controller.uid.value = userId;
     controller.channelName.value = channelName;
@@ -40,7 +39,7 @@ class GoLiveScreen extends StatelessWidget {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         body: Stack(children: [
-          Container(
+          SizedBox(
             height: SizeConfig.screenHeight,
             child: Center(child: _videoPanel()),
           ),
@@ -51,11 +50,11 @@ class GoLiveScreen extends StatelessWidget {
               ),
               Row(
                 children: [
-                  Spacer(),
+                  const Spacer(),
                   Container(
                       width: SizeConfig.blockSizeHorizontal * 13,
                       height: SizeConfig.blockSizeVertical * 4,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: colorRed,
                         borderRadius: BorderRadius.all(Radius.circular(5.0)),
                       ),
@@ -82,7 +81,7 @@ class GoLiveScreen extends StatelessWidget {
                   Container(
                       width: SizeConfig.blockSizeHorizontal * 18,
                       height: SizeConfig.blockSizeVertical * 4,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: colorRed,
                         borderRadius: BorderRadius.all(Radius.circular(5.0)),
                       ),
@@ -124,15 +123,15 @@ class GoLiveScreen extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Spacer(),
+                      const Spacer(),
 
                       Column(
                         children: [
                           Container(
-                            margin: EdgeInsets.only(right: 20),
+                            margin: const EdgeInsets.only(right: 20),
                             width: SizeConfig.blockSizeHorizontal * 32,
                             height: SizeConfig.blockSizeVertical * 4,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           image: DecorationImage(
                               image: AssetImage(appLogo),
                               fit: BoxFit.cover),
@@ -140,11 +139,11 @@ class GoLiveScreen extends StatelessWidget {
 
                             ),),
                           Padding(
-                            padding: EdgeInsets.only(right: 20.0),
+                            padding: const EdgeInsets.only(right: 20.0),
                             child: Container(
                               width: SizeConfig.blockSizeHorizontal * 30,
                               height: SizeConfig.blockSizeVertical * 4,
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 color: colorRed,
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(5.0)),
@@ -154,7 +153,7 @@ class GoLiveScreen extends StatelessWidget {
                                   controller: controller.controller,
                                   widgetBuilder: (_, CurrentRemainingTime? time) {
                                     if (time == null) {
-                                      return Text('Game over');
+                                      return const Text('Game over');
                                     }
                                     return headingText(
                                         "${time.min}M ${time.sec}S LEFT",
@@ -216,14 +215,14 @@ class GoLiveScreen extends StatelessWidget {
         AgoraVideoView(
             controller: VideoViewController(
               rtcEngine: controller.agoraEngine.value,
-              canvas: VideoCanvas(uid: 0),
+              canvas: const VideoCanvas(uid: 0),
             ),
           )
         : commonLoader());
   }
 
   Widget bottomSheetWidget() {
-    return Container(
+    return SizedBox(
       height: SizeConfig.screenHeight / 2,
       child: Padding(
         padding: const EdgeInsets.all(10),
@@ -242,7 +241,7 @@ class GoLiveScreen extends StatelessWidget {
                     fontSize: SizeConfig.blockSizeHorizontal * 3.9),
                 indicatorSize: TabBarIndicatorSize.label,
                 indicatorWeight: 3,
-                tabs: [
+                tabs: const [
                   Tab(
                     text: chat,
                   ),

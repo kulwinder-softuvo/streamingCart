@@ -1,18 +1,11 @@
-import 'dart:io';
-import 'dart:convert';
 import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_countdown_timer/countdown_timer_controller.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:stream_e_cart/common/widgets.dart';
 import 'package:stream_e_cart/go_live/go_live_repo.dart';
-import 'package:stream_e_cart/go_live/model/event_details_model.dart';
-import '../../common/widgets.dart';
 import '../../constants/api_endpoints.dart';
-import '../../constants/string_constants.dart';
-import '../../event_listing/events_repo.dart';
-import '../../utils/const_utils.dart';
 
 class GoLiveController extends GetxController {
   var channelName = "".obs;
@@ -28,7 +21,7 @@ class GoLiveController extends GetxController {
   var isLoadingVideoView = false.obs;
   var viewerCount = 0.obs;
   int endStreamingTime = DateTime.now().millisecondsSinceEpoch +
-      Duration(minutes: 30).inMilliseconds;
+      const Duration(minutes: 30).inMilliseconds;
   late CountdownTimerController controller;
   var isBottomSheetOpen = false.obs;
 
@@ -42,7 +35,7 @@ class GoLiveController extends GetxController {
   }
 
   void onEnd() {
-    print('onEnd');
+    showDebugPrint('onEnd');
   }
 
   Future<void> setupVideoSDKEngine() async {
@@ -103,23 +96,6 @@ class GoLiveController extends GetxController {
     agoraEngine.value.leaveChannel();
   }
 
-  Future<void> joinLiveStreaming() async {
-    print("button pressed-----------------------  ");
-    ChannelMediaOptions options = const ChannelMediaOptions(
-      clientRoleType: ClientRoleType.clientRoleAudience,
-      channelProfile: ChannelProfileType.channelProfileLiveBroadcasting,
-    );
-    await agoraEngine.value.startPreview();
-
-    //Join channel
-    await agoraEngine.value.joinChannel(
-      token: streamingToken.value,
-      channelId: channelName.value,
-      options: options,
-      uid: 0,
-    );
-  }
-
   void getAudienceCountApi() {
 
     GoLiveRepo().getTotalAudienceCount(channelName.value, audienceToken.value).then((value) async {
@@ -128,7 +104,7 @@ class GoLiveController extends GetxController {
         if (value.data != null) {
           viewerCount.value = int.parse(value.data!.audienceTotal.toString());
 
-          Future.delayed(Duration(seconds: 10), () {
+          Future.delayed(const Duration(seconds: 10), () {
             getAudienceCountApi();
           });
         }
@@ -137,5 +113,4 @@ class GoLiveController extends GetxController {
       }
     });
   }
-
 }

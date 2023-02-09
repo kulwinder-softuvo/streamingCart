@@ -13,10 +13,10 @@ class AgoraTokenGeneratorModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['rtcToken_Account'] = this.rtcTokenAccount;
-    data['rtcToken_UID'] = this.rtcTokenUID;
-    data['rtmToken'] = this.rtmToken;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['rtcToken_Account'] = rtcTokenAccount;
+    data['rtcToken_UID'] = rtcTokenUID;
+    data['rtmToken'] = rtmToken;
     return data;
   }
 }

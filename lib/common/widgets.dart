@@ -1,7 +1,4 @@
-import 'dart:ffi';
-
 import 'package:another_flushbar/flushbar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stream_e_cart/common/size_config.dart';
@@ -56,7 +53,7 @@ AppBar appBar(BuildContext context, GlobalKey<ScaffoldState> key,
               height: SizeConfig.blockSizeVertical * 5,
             ),
           ),*/
-          Container(
+          SizedBox(
             width: SizeConfig.blockSizeHorizontal * 5,
             height: SizeConfig.blockSizeVertical * 5,
           ),
@@ -82,7 +79,7 @@ void showLogoutDialog() {
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(30.0)),
       ),
-      content: Container(
+      content: SizedBox(
           width: SizeConfig.screenWidth / 1.5,
           height: SizeConfig.blockSizeVertical * 14,
           child: Column(
@@ -96,7 +93,7 @@ void showLogoutDialog() {
                   height: SizeConfig.blockSizeVertical * 3,
                 ),
                 Container(
-                  margin: EdgeInsets.only(left: 20, right: 20),
+                  margin: const EdgeInsets.only(left: 20, right: 20),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -163,7 +160,7 @@ Drawer drawerLayout(BuildContext context) {
           child: Text(''),
         ),
         ListTile(
-          leading: Icon(
+          leading: const Icon(
             Icons.home,
             color: colorRed,
           ),
@@ -189,8 +186,8 @@ Drawer drawerLayout(BuildContext context) {
 showMessage(String message) {
   Flushbar(
     message: message,
-    duration: Duration(seconds: 2),
-  )..show(Get.context!);
+    duration: const Duration(seconds: 2),
+  ).show(Get.context!);
 }
 
 showDebugPrint(String message) {
@@ -199,7 +196,7 @@ showDebugPrint(String message) {
 
 Widget commonLoader() {
   return Stack(
-    children: [
+    children: const [
       Opacity(
         opacity: 0.4,
         child: ModalBarrier(dismissible: false, color: Colors.grey),

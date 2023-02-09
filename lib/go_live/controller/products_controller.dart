@@ -8,10 +8,6 @@ class ProductsController extends GetxController{
   var productsList = <Products>[].obs;
   var eventId = "".obs;
 
-  @override
-  void onInit() {
-    super.onInit();
-  }
 
   void getEventDetails(String eventId) {
     EventsRepo().getEventDetails(eventId).then((value) async {

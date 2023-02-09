@@ -1,11 +1,9 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 extension StringExtensions on String? {
   String toStringConversion() {
     if (this == null || this == "null") return "";
-    return this.toString();
+    return toString();
   }
 
   bool isNullOrEmpty() {
@@ -15,19 +13,19 @@ extension StringExtensions on String? {
 
   double toDoubleConversion() {
     if (this == null || this == "null" || this == "" || this == " ") return 0.0;
-    if (this.isNumericOnly()) return double.parse(this!);
+    if (isNumericOnly()) return double.parse(this!);
     return 0.0;
   }
 
   int toIntConversionWithDefaultValueOne() {
     if (this == null || this == "null" || this == "" || this == " ") return 1;
-    if (this.isNumericOnly()) return double.parse(this!).toInt();
+    if (isNumericOnly()) return double.parse(this!).toInt();
     return 1;
   }
 
   int toIntConversion() {
     if (this == null || this == "null" || this == "" || this == " ") return 0;
-    if (this.isNumericOnly()) return double.parse(this!).toInt();
+    if (isNumericOnly()) return double.parse(this!).toInt();
     return 0;
   }
 
@@ -35,14 +33,14 @@ extension StringExtensions on String? {
     if (this == null) {
       return false;
     }
-    return this!.contains(new RegExp(r'[0-9]'));
+    return this!.contains(RegExp(r'[0-9]'));
   }
 
-  bool isValidPanCard() {
+/*  bool isValidPanCard() {
     if (this == null) return false;
     final regExp = RegExp(r'^[A-Z]{5}[0-9]{4}[A-Z]{1}+$');
     return regExp.hasMatch(this!);
-  }
+  }*/
 
   // For replacing
   String replaceType(String value) {
@@ -78,16 +76,16 @@ extension DateTimeExtension on DateTime {
 
   bool isToday() {
     final now = DateTime.now();
-    return now.day == this.day &&
-        now.month == this.month &&
-        now.year == this.year;
+    return now.day == day &&
+        now.month == month &&
+        now.year == year;
   }
 
   bool isYesterday() {
-    final yesterday = DateTime.now().subtract(Duration(days: 1));
-    return yesterday.day == this.day &&
-        yesterday.month == this.month &&
-        yesterday.year == this.year;
+    final yesterday = DateTime.now().subtract(const Duration(days: 1));
+    return yesterday.day == day &&
+        yesterday.month == month &&
+        yesterday.year == year;
   }
 }
 

@@ -1,21 +1,19 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stream_e_cart/common/widgets.dart';
 import 'package:stream_e_cart/constants/app_colors.dart';
 import 'package:stream_e_cart/constants/app_images.dart';
-import 'package:stream_e_cart/go_live/controller/chat_controller.dart';
-import 'package:stream_e_cart/go_live/controller/go_live_controller.dart';
 import 'package:stream_e_cart/go_live/controller/products_controller.dart';
 import 'package:stream_e_cart/go_live/model/event_details_model.dart';
 
 import '../../common/size_config.dart';
 import '../../constants/string_constants.dart';
 
+// ignore: must_be_immutable
 class ProductListScreen extends StatelessWidget {
   var controller = Get.put(ProductsController());
 
-  ProductListScreen(String eventId) {
+  ProductListScreen(String eventId, {super.key}) {
     controller.eventId.value = eventId;
     controller.getEventDetails(controller.eventId.value);
   }
@@ -23,7 +21,7 @@ class ProductListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => controller.productsList.length > 0
+      () => controller.productsList.isNotEmpty
           ? ListView.builder(
               itemCount: controller.productsList.length,
               scrollDirection: Axis.vertical,
@@ -33,13 +31,11 @@ class ProductListScreen extends StatelessWidget {
                 return productRowItem(controller.productsList[index]);
               },
             )
-          : Container(
-              child: Center(
-                child: headingText(noProductIsAvailableForSale,
-                    SizeConfig.blockSizeHorizontal * 4, colorGrey,
-                    weight: FontWeight.w500),
-              ),
-            ),
+          : Center(
+            child: headingText(noProductIsAvailableForSale,
+                SizeConfig.blockSizeHorizontal * 4, colorGrey,
+                weight: FontWeight.w500),
+          ),
     );
   }
 
@@ -52,7 +48,7 @@ class ProductListScreen extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
         ),
         child: Padding(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
             FadeInImage.assetNetwork(
               placeholder: appIcon,
@@ -80,7 +76,7 @@ class ProductListScreen extends StatelessWidget {
                 ],
               ),
             ),
-            Spacer(),
+            const Spacer(),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Image.asset(

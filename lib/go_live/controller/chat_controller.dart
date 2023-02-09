@@ -8,7 +8,6 @@ import 'package:stream_e_cart/constants/string_constants.dart';
 import 'package:stream_e_cart/go_live/go_live_repo.dart';
 
 import '../../common/widgets.dart';
-import '../../utils/const_utils.dart';
 import '../model/chat_model.dart';
 
 class ChatController extends GetxController {
@@ -122,7 +121,7 @@ class ChatController extends GetxController {
     }
   }
 
-  void _signOut() async {
+  /*void _signOut() async {
     try {
       await ChatClient.getInstance.logout(true);
       _addLogToConsole("sign out succeed");
@@ -130,10 +129,10 @@ class ChatController extends GetxController {
       _addLogToConsole(
           "sign out failed, code: ${e.code}, desc: ${e.description}");
     }
-  }
+  }*/
 
   void sendMessage() async {
-    if (userId.value == null || chatController.value.text == null || chatController.value.text == "") {
+    if (chatController.value.text == "") {
       _addLogToConsole("single chat id or message content is null");
       showMessage(typeAMessage);
       return;
@@ -146,7 +145,7 @@ class ChatController extends GetxController {
         onSuccess: () {
           _addLogToConsole("send message: ${chatController.value.text}");
           ChatTextMessageBody body = msg.body as ChatTextMessageBody;
-          chatList.value.add(
+          chatList.add(
               ChatModel(name: store.read(userName), message: body.content));
           chatList.refresh();
           chatController.clear();
@@ -163,7 +162,7 @@ class ChatController extends GetxController {
   }
 
   void _addLogToConsole(String log) {
-    _logText.add(_timeString + ": " + log);
+    _logText.add("$_timeString: $log");
 
     showDebugPrint("message agora -----------------------   $log");
     // scrollController.jumpTo(scrollController.position.maxScrollExtent);
@@ -196,7 +195,7 @@ class ChatController extends GetxController {
            userId,
             chatToken.value,
           );
-          _addLogToConsole("login succeed, userId: ${userId}");
+          _addLogToConsole("login succeed, userId: $userId");
         } on ChatError catch (e) {
           _addLogToConsole("login failed, code: ${e.code}, desc: ${e.description}");
         }
@@ -205,5 +204,4 @@ class ChatController extends GetxController {
       }
     });
   }
-
 }

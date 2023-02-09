@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:stream_e_cart/auth_screens/controller/login_controller.dart';
 import 'package:stream_e_cart/common/size_config.dart';
 import 'package:stream_e_cart/constants/app_colors.dart';
@@ -10,8 +8,11 @@ import 'package:stream_e_cart/constants/app_images.dart';
 import '../../common/widgets.dart';
 import '../../constants/string_constants.dart';
 
+// ignore: must_be_immutable
 class LoginScreen extends StatelessWidget {
   var controller = Get.put(LoginController());
+
+  LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +29,7 @@ class LoginScreen extends StatelessWidget {
               )),
           SingleChildScrollView(
             child: Container(
-              margin: EdgeInsets.only(left: 20, right: 20),
+              margin: const EdgeInsets.only(left: 20, right: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -56,12 +57,12 @@ class LoginScreen extends StatelessWidget {
                     height: SizeConfig.blockSizeVertical * 3,
                   ),
                   headingText(
-                      host_id, SizeConfig.blockSizeHorizontal * 3.5, colorBlack,
+                      hostId, SizeConfig.blockSizeHorizontal * 3.5, colorBlack,
                       weight: FontWeight.w600),
                   SizedBox(
                     height: SizeConfig.blockSizeVertical * 2,
                   ),
-                  Container(
+                  SizedBox(
                     height: SizeConfig.blockSizeVertical * 6,
                     child: TextFormField(
                       controller: controller.hostIdController.value,
@@ -73,8 +74,8 @@ class LoginScreen extends StatelessWidget {
                           : enterAValidHostId,
                       style: const TextStyle(color: colorBlack),
                       decoration: InputDecoration(
-                        hintText: enter_host_id,
-                        hintStyle: TextStyle(color: colorGrey),
+                        hintText: enterHostId,
+                        hintStyle: const TextStyle(color: colorGrey),
                         filled: true,
                         suffixIcon: Padding(
                           padding: const EdgeInsets.all(12.0),
@@ -85,11 +86,11 @@ class LoginScreen extends StatelessWidget {
                           ),
                         ),
                         fillColor: colorWhite,
-                        enabledBorder: OutlineInputBorder(
+                        enabledBorder: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(5.0)),
                           borderSide: BorderSide(color: colorGrey, width: 0.7),
                         ),
-                        focusedBorder: OutlineInputBorder(
+                        focusedBorder: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(5.0)),
                           borderSide: BorderSide(color: colorGrey),
                         ),
@@ -102,13 +103,13 @@ class LoginScreen extends StatelessWidget {
                   SizedBox(
                     height: SizeConfig.blockSizeVertical * 2,
                   ),
-                  headingText(host_email_address,
+                  headingText(hostEmailAddress,
                       SizeConfig.blockSizeHorizontal * 3.5, colorBlack,
                       weight: FontWeight.w600),
                   SizedBox(
                     height: SizeConfig.blockSizeVertical * 2,
                   ),
-                  Container(
+                  SizedBox(
                     height: SizeConfig.blockSizeVertical * 6,
                     child: TextFormField(
                       controller: controller.emailController.value,
@@ -117,8 +118,8 @@ class LoginScreen extends StatelessWidget {
                       textAlignVertical: TextAlignVertical.bottom,
                       style: const TextStyle(color: colorBlack),
                       decoration: InputDecoration(
-                        hintText: enter_host_email_address,
-                        hintStyle: TextStyle(color: Colors.grey),
+                        hintText: enterHostEmailAddress,
+                        hintStyle: const TextStyle(color: Colors.grey),
                         filled: true,
                         suffixIcon: Padding(
                           padding: const EdgeInsets.all(12.0),
@@ -129,11 +130,11 @@ class LoginScreen extends StatelessWidget {
                           ),
                         ),
                         fillColor: colorWhite,
-                        enabledBorder: OutlineInputBorder(
+                        enabledBorder: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(5.0)),
                           borderSide: BorderSide(color: colorGrey, width: 0.7),
                         ),
-                        focusedBorder: OutlineInputBorder(
+                        focusedBorder: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(5.0)),
                           borderSide: BorderSide(color: colorGrey),
                         ),
@@ -143,13 +144,13 @@ class LoginScreen extends StatelessWidget {
                   SizedBox(
                     height: SizeConfig.blockSizeVertical * 2,
                   ),
-                  headingText(host_password,
+                  headingText(hostPassword,
                       SizeConfig.blockSizeHorizontal * 3.5, colorBlack,
                       weight: FontWeight.w600),
                   SizedBox(
                     height: SizeConfig.blockSizeVertical * 2,
                   ),
-                  Container(
+                  SizedBox(
                     height: SizeConfig.blockSizeVertical * 6,
                     child: TextFormField(
                       controller: controller.passwordController.value,
@@ -159,8 +160,8 @@ class LoginScreen extends StatelessWidget {
                       textAlignVertical: TextAlignVertical.bottom,
                       style: const TextStyle(color: colorBlack),
                       decoration: InputDecoration(
-                        hintText: enter_host_password,
-                        hintStyle: TextStyle(color: Colors.grey),
+                        hintText: enterHostPassword,
+                        hintStyle: const TextStyle(color: Colors.grey),
                         filled: true,
                         suffixIcon: Padding(
                           padding: const EdgeInsets.all(12.0),
@@ -171,11 +172,11 @@ class LoginScreen extends StatelessWidget {
                           ),
                         ),
                         fillColor: colorWhite,
-                        enabledBorder: OutlineInputBorder(
+                        enabledBorder: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(5.0)),
                           borderSide: BorderSide(color: colorGrey, width: 0.7),
                         ),
-                        focusedBorder: OutlineInputBorder(
+                        focusedBorder: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(5.0)),
                           borderSide: BorderSide(color: colorGrey),
                         ),
@@ -191,13 +192,13 @@ class LoginScreen extends StatelessWidget {
                           controller.loginClick(context);
                         },
                         style: ElevatedButton.styleFrom(
-                          primary: colorRed,
+                          backgroundColor: colorRed,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),
                           elevation: 15.0,
                         ),
-                        child: Container(
+                        child: SizedBox(
                             width: SizeConfig.screenWidth / 1.5,
                             height: SizeConfig.blockSizeVertical * 6,
                             child: Center(

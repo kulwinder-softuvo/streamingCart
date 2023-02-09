@@ -13,15 +13,15 @@ class ListEventModel {
     if (json['data'] != null) {
       data = <Events>[];
       json['data'].forEach((v) {
-        data!.add(new Events.fromJson(v));
+        data!.add(Events.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['code'] = this.code;
-    data['message'] = this.message;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['code'] = code;
+    data['message'] = message;
     if (this.data != null) {
       data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
@@ -82,22 +82,22 @@ class Events {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['title'] = this.title;
-    data['event_desc'] = this.eventDesc;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    data['event_start_time'] = this.eventStartTime;
-    data['event_end_time'] = this.eventEndTime;
-    data['host_id'] = this.hostId;
-    data['business_id'] = this.businessId;
-    data['created_by_id'] = this.createdById;
-    data['video_link'] = this.videoLink;
-    data['channel_name'] = this.channelName;
-    data['banner_image'] = this.bannerImage;
-    data['status'] = this.status;
-    data['is_published'] = this.isPublished;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['title'] = title;
+    data['event_desc'] = eventDesc;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    data['event_start_time'] = eventStartTime;
+    data['event_end_time'] = eventEndTime;
+    data['host_id'] = hostId;
+    data['business_id'] = businessId;
+    data['created_by_id'] = createdById;
+    data['video_link'] = videoLink;
+    data['channel_name'] = channelName;
+    data['banner_image'] = bannerImage;
+    data['status'] = status;
+    data['is_published'] = isPublished;
     return data;
   }
 }

@@ -9,16 +9,16 @@ class GetAudienceTokenModel {
     if (json['projects'] != null) {
       projects = <Projects>[];
       json['projects'].forEach((v) {
-        projects!.add(new Projects.fromJson(v));
+        projects!.add(Projects.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['success'] = this.success;
-    if (this.projects != null) {
-      data['projects'] = this.projects!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['success'] = success;
+    if (projects != null) {
+      data['projects'] = projects!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -30,7 +30,7 @@ class Projects {
   int? status;
   String? signKey;
   String? vendorKey;
-  Null? recordingServer;
+  String? recordingServer;
   int? created;
 
   Projects(
@@ -53,14 +53,14 @@ class Projects {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['status'] = this.status;
-    data['sign_key'] = this.signKey;
-    data['vendor_key'] = this.vendorKey;
-    data['recording_server'] = this.recordingServer;
-    data['created'] = this.created;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['status'] = status;
+    data['sign_key'] = signKey;
+    data['vendor_key'] = vendorKey;
+    data['recording_server'] = recordingServer;
+    data['created'] = created;
     return data;
   }
 }

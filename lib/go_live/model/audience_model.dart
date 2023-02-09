@@ -8,12 +8,16 @@ class AudienceModel {
 
   AudienceModel.fromJson(Map<String, dynamic> json) {
     success = json['success'];
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+    if (json['data'] != null) {
+      data = Data.fromJson(json['data']);
+    } else {
+      data = null;
+    }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['success'] = this.success;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['success'] = success;
     if (this.data != null) {
       data['data'] = this.data!.toJson();
     }
@@ -44,12 +48,12 @@ class Data {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['channel_exist'] = this.channelExist;
-    data['mode'] = this.mode;
-    data['broadcasters'] = this.broadcasters;
-    data['audience'] = this.audience;
-    data['audience_total'] = this.audienceTotal;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['channel_exist'] = channelExist;
+    data['mode'] = mode;
+    data['broadcasters'] = broadcasters;
+    data['audience'] = audience;
+    data['audience_total'] = audienceTotal;
     return data;
   }
 }
