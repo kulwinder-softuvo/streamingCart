@@ -59,13 +59,14 @@ class ProductListScreen extends StatelessWidget {
             SizedBox(
               width: SizeConfig.blockSizeHorizontal * 4,
             ),
-            Expanded(
+            SizedBox(
+              width: SizeConfig.blockSizeHorizontal * 30,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   headingText(productsList.title.toString(),
-                      SizeConfig.blockSizeHorizontal * 3.8, colorBlack,
+                      SizeConfig.blockSizeHorizontal * 4, colorBlack,
                       weight: FontWeight.w700),
                   SizedBox(
                     height: SizeConfig.blockSizeVertical * 1,

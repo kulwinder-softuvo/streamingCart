@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:stream_e_cart/constants/api_endpoints.dart';
 import 'package:stream_e_cart/constants/storage_constants.dart';
-import 'package:stream_e_cart/go_live/model/agora_register_model.dart';
 import 'package:stream_e_cart/go_live/model/audience_model.dart';
 import 'package:stream_e_cart/go_live/model/chat_token_model.dart';
 
@@ -45,10 +44,8 @@ class GoLiveRepo extends GetConnect {
   Future<ChatTokenModel> getChatToken(
       String userId) async {
     var map = {
-      "appId": APIEndpoints.agoraAppId,
-      "appCertificate": APIEndpoints.agoraAppCertificates,
-      "userUuid": userId,
-
+      "username": userId,
+      "nickname": store.read(userName)
     };
     try {
       final result = await InternetAddress.lookup('google.com');
@@ -75,7 +72,7 @@ class GoLiveRepo extends GetConnect {
       return ChatTokenModel();
     }
   }
-
+/*
  Future<AgoraRegisterModel> agoraRegisterUser(
       String appToken, String userId) async {
     var map = {
@@ -110,7 +107,7 @@ class GoLiveRepo extends GetConnect {
     } catch (e) {
       return AgoraRegisterModel();
     }
-  }
+  }*/
 
 
 }

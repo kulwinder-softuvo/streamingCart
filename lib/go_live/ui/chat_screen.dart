@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stream_e_cart/common/widgets.dart';
@@ -13,10 +15,14 @@ import '../../constants/string_constants.dart';
 class ChatScreen extends StatelessWidget {
   var controller = Get.put(ChatController());
 
-  ChatScreen({super.key});
+  ChatScreen(String chatRoomId, {super.key}){
+    controller.agoraChatRoomId.value = chatRoomId;
+  }
 
   @override
   Widget build(BuildContext context) {
+    Timer(const Duration(milliseconds: 500), () => controller.scrollController.value.jumpTo(controller.scrollController.value.position.maxScrollExtent));
+
     return Scaffold(
       backgroundColor: colorWhite,
       body: Stack(
@@ -24,6 +30,7 @@ class ChatScreen extends StatelessWidget {
           SizedBox(
             height: SizeConfig.blockSizeVertical * 31,
             child: Obx (() => controller.chatList.isNotEmpty ? ListView.builder(
+              controller: controller.scrollController.value,
               itemCount: controller.chatList.length,
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
@@ -103,16 +110,21 @@ class ChatScreen extends StatelessWidget {
           headingText(
               chatList.name.toString(),
               SizeConfig.blockSizeHorizontal * 3.8,
-              index % 2 == 0 ? colorYellow : colorRed,
+              chatList.color,
               weight: FontWeight.w600),
           SizedBox(
             width: SizeConfig.blockSizeHorizontal * 3,
           ),
-          headingText(
+          Expanded(
+            child: Text(
               chatList.message.toString(),
-              SizeConfig.blockSizeHorizontal * 3.8,
-              textColor,
-              weight: FontWeight.w400),
+              style: TextStyle(
+                  fontWeight: FontWeight.w400,
+                  fontFamily: FontFamily.poppins,
+                  color: textColor,
+                  fontSize: SizeConfig.blockSizeHorizontal * 3.8),
+            ),
+          ),
           SizedBox(
             height: SizeConfig.blockSizeVertical * 5,
           ),

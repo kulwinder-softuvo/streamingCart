@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:agora_chat_sdk/agora_chat_sdk.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:stream_e_cart/constants/api_endpoints.dart';
+import 'package:stream_e_cart/constants/app_colors.dart';
 import 'package:stream_e_cart/constants/storage_constants.dart';
 import 'package:stream_e_cart/constants/string_constants.dart';
 import 'package:stream_e_cart/go_live/go_live_repo.dart';
@@ -17,13 +20,15 @@ class ChatController extends GetxController {
   var userId = "".obs;
   var chatToken = "".obs;
   var agoraAppChatToken = "".obs;
+  var agoraChatRoomId = "".obs;
 
-  ScrollController scrollController = ScrollController();
+  var scrollController = ScrollController().obs;
   final List<String> _logText = [];
   var chatList = <ChatModel>[].obs;
 
   @override
   void onInit() {
+
     getChatTokenApi(userId.value);
     initAgoraChatSDK();
     super.onInit();
@@ -53,6 +58,11 @@ class ChatController extends GetxController {
             _addLogToConsole(
               "receive text message: ${body.content}, from: ${msg.from}",
             );
+            chatList.add(
+                ChatModel(msg.from.toString(), body.content, colorYellow));
+            chatList.refresh();
+            Timer(const Duration(milliseconds: 500), () => scrollController.value.jumpTo(scrollController.value.position.maxScrollExtent));
+
           }
           break;
         case MessageType.IMAGE:
@@ -106,18 +116,17 @@ class ChatController extends GetxController {
     }
   }
 
-  void signInToAgora() async {
-    userId.value = store.read(agoraChatUserId);
-
+  void signInToAgora(String userId) async {
     try {
       await ChatClient.getInstance.loginWithAgoraToken(
-        userId.value,
+        userId,
         chatToken.value,
       );
-      _addLogToConsole("login succeed, userId: ${userId.value}");
+      _addLogToConsole("login succeed, userId: $userId");
+      joinChatRoom(agoraChatRoomId.value);
     } on ChatError catch (e) {
       _addLogToConsole("login failed, code: ${e.code}, desc: ${e.description}");
-      getAgoraRegisterApi(agoraAppChatToken.value, userId.value);
+      //  getAgoraRegisterApi(agoraAppChatToken.value, userId.value);
     }
   }
 
@@ -138,15 +147,15 @@ class ChatController extends GetxController {
       return;
     } else {
       var msg = ChatMessage.createTxtSendMessage(
-        targetId: userId.value,
-        content: chatController.value.text,
-      );
+          targetId: agoraChatRoomId.value,
+          content: chatController.value.text,
+          chatType: ChatType.ChatRoom);
       msg.setMessageStatusCallBack(MessageStatusCallBack(
         onSuccess: () {
           _addLogToConsole("send message: ${chatController.value.text}");
           ChatTextMessageBody body = msg.body as ChatTextMessageBody;
           chatList.add(
-              ChatModel(name: store.read(userName), message: body.content));
+              ChatModel(store.read(userName), body.content, colorRed));
           chatList.refresh();
           chatController.clear();
         },
@@ -178,16 +187,31 @@ class ChatController extends GetxController {
         chatToken.value = value.userToken.toString();
         agoraAppChatToken.value = value.appToken.toString();
 
-        signInToAgora();
+        signInToAgora(value.username.toString());
         addChatListener();
-
       } else {
         return;
       }
     });
   }
 
- void getAgoraRegisterApi(String appToken, String userId) {
+  Future<void> joinChatRoom(String roomId) async {
+    try {
+      await ChatClient.getInstance.chatRoomManager.joinChatRoom(roomId);
+    } on ChatError catch (e) {
+      showDebugPrint("room join failure ---- $e");
+    }
+  }
+
+  Future<void> leaveChatRoom(String roomId) async {
+    try {
+      await ChatClient.getInstance.chatRoomManager.leaveChatRoom(roomId);
+    } on ChatError catch (e) {
+      showDebugPrint("room leave failure ---- $e");
+    }
+  }
+
+/* void getAgoraRegisterApi(String appToken, String userId) {
     GoLiveRepo().agoraRegisterUser(appToken, userId).then((value) async {
       if (value.applicationName != "") {
         try {
@@ -203,5 +227,5 @@ class ChatController extends GetxController {
         return;
       }
     });
-  }
+  }*/
 }

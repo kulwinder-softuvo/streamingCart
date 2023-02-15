@@ -12,6 +12,7 @@ class GoLiveController extends GetxController {
   var streamingToken = "".obs;
   var eventId = "".obs;
   var audienceToken = "".obs;
+  var agoraChatRoomId = "".obs;
   var showLoader = false.obs;
   var uid = "0".obs; // uid of the local user
   var remoteUid = "".obs; // uid of the remote user
@@ -104,7 +105,7 @@ class GoLiveController extends GetxController {
         if (value.data != null) {
           viewerCount.value = int.parse(value.data!.audienceTotal.toString());
 
-          Future.delayed(const Duration(seconds: 10), () {
+          Future.delayed(const Duration(seconds: 15), () {
             getAudienceCountApi();
           });
         }

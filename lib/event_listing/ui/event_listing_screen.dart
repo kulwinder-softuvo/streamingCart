@@ -166,7 +166,7 @@ class EventListingScreen extends StatelessWidget {
               child: ElevatedButton(
                   onPressed: () async {
                     showDebugPrint(
-                        "join hosting through this link ----->   ${"https://cheerful-crostata-f60ebe.netlify.app/?event_id=${eventList.id}"}");
+                        "join hosting through this link ----->   ${"https://streamingweb.softuvo.click/?event_id=${eventList.id}"}");
 
                     controller.compareDatesForEventStatus(
                                 eventList.eventStartTime.toString(),

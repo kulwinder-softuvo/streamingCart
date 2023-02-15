@@ -5,6 +5,7 @@ import 'package:flutter_countdown_timer/index.dart';
 import 'package:stream_e_cart/common/size_config.dart';
 import 'package:stream_e_cart/constants/app_colors.dart';
 import 'package:stream_e_cart/constants/app_images.dart';
+import 'package:stream_e_cart/go_live/controller/chat_controller.dart';
 import 'package:stream_e_cart/go_live/controller/go_live_controller.dart';
 import 'package:stream_e_cart/go_live/ui/chat_screen.dart';
 import 'package:stream_e_cart/go_live/ui/productListScreen.dart';
@@ -15,12 +16,13 @@ import '../../constants/string_constants.dart';
 class GoLiveScreen extends StatelessWidget {
   var controller = Get.put(GoLiveController());
 
-  GoLiveScreen(String token, String userId, String eventId, String channelName, String audienceToken, {super.key}) {
+  GoLiveScreen(String token, String userId, String eventId, String channelName, String audienceToken, String chatRoomId, {super.key}) {
     controller.streamingToken.value = token;
     controller.uid.value = userId;
     controller.channelName.value = channelName;
     controller.eventId.value = eventId;
     controller.audienceToken.value = audienceToken;
+    controller.agoraChatRoomId.value = chatRoomId;
 
     showDebugPrint("agora token ->  ${controller.streamingToken.value}\n channel name--> ${controller.channelName.value}");
 
@@ -33,6 +35,8 @@ class GoLiveScreen extends StatelessWidget {
         await controller.agoraEngine.value.leaveChannel();
         controller.agoraEngine.value.release();
         controller.leave();
+        Get.delete<GoLiveController>();
+        Get.delete<ChatController>();
         Get.back();
         return Future.value(false);
       },
@@ -253,7 +257,7 @@ class GoLiveScreen extends StatelessWidget {
               Expanded(
                   child: TabBarView(
                 children: [
-                  ChatScreen(),
+                  ChatScreen(controller.agoraChatRoomId.value),
                   ProductListScreen(controller.eventId.value),
                 ],
               ))

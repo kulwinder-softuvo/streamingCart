@@ -45,6 +45,7 @@ class Events {
   String? bannerImage;
   int? status;
   int? isPublished;
+  String? chatRoomId;
 
   Events(
       {this.id,
@@ -61,7 +62,8 @@ class Events {
       this.channelName,
       this.bannerImage,
       this.status,
-      this.isPublished});
+      this.isPublished,
+      this.chatRoomId});
 
   Events.fromJson(Map<String, dynamic> json) {
     id = json['id'].toString().toIntConversion();
@@ -79,6 +81,7 @@ class Events {
     bannerImage = json['banner_image'].toString().toStringConversion();
     status = json['status'].toString().toIntConversion();
     isPublished = json['is_published'].toString().toIntConversion();
+    chatRoomId = json['chat_room_id'].toString().toStringConversion();
   }
 
   Map<String, dynamic> toJson() {
@@ -98,6 +101,7 @@ class Events {
     data['banner_image'] = bannerImage;
     data['status'] = status;
     data['is_published'] = isPublished;
+    data['chat_room_id'] = chatRoomId;
     return data;
   }
 }
