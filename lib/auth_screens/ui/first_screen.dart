@@ -10,7 +10,7 @@ import '../controller/first_screen_controller.dart';
 
 // ignore: must_be_immutable
 class FirstScreen extends StatelessWidget {
-  var controller = Get.put(FirstScreencontroller());
+  var controller = Get.put(FirstScreenController());
 
   FirstScreen({super.key});
   @override

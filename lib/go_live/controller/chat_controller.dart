@@ -123,7 +123,8 @@ class ChatController extends GetxController {
         chatToken.value,
       );
       _addLogToConsole("login succeed, userId: $userId");
-      joinChatRoom(agoraChatRoomId.value);
+     // joinChatRoom(agoraChatRoomId.value);
+      joinChatRoom("206800089579521");
     } on ChatError catch (e) {
       _addLogToConsole("login failed, code: ${e.code}, desc: ${e.description}");
       //  getAgoraRegisterApi(agoraAppChatToken.value, userId.value);
@@ -147,7 +148,7 @@ class ChatController extends GetxController {
       return;
     } else {
       var msg = ChatMessage.createTxtSendMessage(
-          targetId: agoraChatRoomId.value,
+          targetId: "206800089579521",
           content: chatController.value.text,
           chatType: ChatType.ChatRoom);
       msg.setMessageStatusCallBack(MessageStatusCallBack(
@@ -158,6 +159,8 @@ class ChatController extends GetxController {
               ChatModel(store.read(userName), body.content, colorRed));
           chatList.refresh();
           chatController.clear();
+          Timer(const Duration(milliseconds: 500), () => scrollController.value.jumpTo(scrollController.value.position.maxScrollExtent));
+
         },
         onError: (e) {
           _addLogToConsole(

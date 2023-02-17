@@ -18,8 +18,8 @@ class LoginController extends GetxController {
 
   @override
   void onInit() {
-    hostIdController.value.text = "HOST802440";
-    emailController.value.text = "kulwinder12@yopmail.com";
+    hostIdController.value.text = "HOST222862";
+    emailController.value.text = "testuser@yopmail.com";
     passwordController.value.text = "123456";
     super.onInit();
   }

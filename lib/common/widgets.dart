@@ -87,7 +87,7 @@ void showLogoutDialog() {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                headingText(areYouSureToLogotFromApp,
+                headingText(areYouSureToLogoutFromApp,
                     SizeConfig.blockSizeHorizontal * 3.2, colorBlack,
                     weight: FontWeight.w500),
                 SizedBox(

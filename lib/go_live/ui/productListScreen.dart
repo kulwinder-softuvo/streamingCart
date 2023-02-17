@@ -54,6 +54,7 @@ class ProductListScreen extends StatelessWidget {
               placeholder: appIcon,
               image: productsList.image.toString(),
               width: SizeConfig.blockSizeHorizontal * 30,
+              height: SizeConfig.blockSizeVertical * 10,
               fit: BoxFit.fill,
             ),
             SizedBox(

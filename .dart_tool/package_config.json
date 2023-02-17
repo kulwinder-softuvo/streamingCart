@@ -195,7 +195,7 @@
     },
     {
       "name": "path_provider",
-      "rootUri": "file:///Users/softuvo/dilpreet/LatestSDK/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-2.0.11",
+      "rootUri": "file:///Users/softuvo/dilpreet/LatestSDK/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-2.0.12",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
@@ -206,20 +206,14 @@
       "languageVersion": "2.14"
     },
     {
-      "name": "path_provider_ios",
-      "rootUri": "file:///Users/softuvo/dilpreet/LatestSDK/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_ios-2.0.11",
-      "packageUri": "lib/",
-      "languageVersion": "2.14"
-    },
-    {
-      "name": "path_provider_linux",
-      "rootUri": "file:///Users/softuvo/dilpreet/LatestSDK/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_linux-2.1.7",
+      "name": "path_provider_foundation",
+      "rootUri": "file:///Users/softuvo/dilpreet/LatestSDK/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_foundation-2.1.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
-      "name": "path_provider_macos",
-      "rootUri": "file:///Users/softuvo/dilpreet/LatestSDK/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_macos-2.0.7",
+      "name": "path_provider_linux",
+      "rootUri": "file:///Users/softuvo/dilpreet/LatestSDK/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_linux-2.1.8",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -357,9 +351,9 @@
     },
     {
       "name": "xdg_directories",
-      "rootUri": "file:///Users/softuvo/dilpreet/LatestSDK/flutter/.pub-cache/hosted/pub.dartlang.org/xdg_directories-0.2.0+3",
+      "rootUri": "file:///Users/softuvo/dilpreet/LatestSDK/flutter/.pub-cache/hosted/pub.dartlang.org/xdg_directories-1.0.0",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.17"
     },
     {
       "name": "stream_e_cart",
@@ -368,7 +362,7 @@
       "languageVersion": "2.18"
     }
   ],
-  "generated": "2023-02-15T12:23:31.007905Z",
+  "generated": "2023-02-17T06:23:03.747852Z",
   "generator": "pub",
   "generatorVersion": "2.18.6"
 }

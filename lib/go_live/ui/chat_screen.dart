@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stream_e_cart/common/widgets.dart';
@@ -21,8 +19,6 @@ class ChatScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Timer(const Duration(milliseconds: 500), () => controller.scrollController.value.jumpTo(controller.scrollController.value.position.maxScrollExtent));
-
     return Scaffold(
       backgroundColor: colorWhite,
       body: Stack(

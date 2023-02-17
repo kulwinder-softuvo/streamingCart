@@ -1,11 +1,17 @@
 import 'package:agora_rtc_engine/agora_rtc_engine.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_countdown_timer/countdown_timer_controller.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:stream_e_cart/common/widgets.dart';
+import 'package:stream_e_cart/event_listing/controller/event_listing_controller.dart';
+import 'package:stream_e_cart/event_listing/ui/event_listing_screen.dart';
 import 'package:stream_e_cart/go_live/go_live_repo.dart';
+import '../../common/size_config.dart';
 import '../../constants/api_endpoints.dart';
+import '../../constants/app_colors.dart';
+import '../../constants/string_constants.dart';
+import 'chat_controller.dart';
 
 class GoLiveController extends GetxController {
   var channelName = "".obs;
@@ -36,7 +42,12 @@ class GoLiveController extends GetxController {
   }
 
   void onEnd() {
-    showDebugPrint('onEnd');
+    endStreamingTime = DateTime.now().millisecondsSinceEpoch +
+        const Duration(minutes: 30).inMilliseconds;
+    showHostingTimeOutDialog();
+    Future.delayed(const Duration(seconds: 3), () {
+      backPressButton();
+    });
   }
 
   Future<void> setupVideoSDKEngine() async {
@@ -113,5 +124,42 @@ class GoLiveController extends GetxController {
         return;
       }
     });
+  }
+
+  void showHostingTimeOutDialog() {
+    Get.dialog(
+      barrierDismissible: false,
+      AlertDialog(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(30.0)),
+        ),
+        content: SizedBox(
+            width: SizeConfig.screenWidth / 1.5,
+            height: SizeConfig.blockSizeVertical * 14,
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  headingText(opsYourStreamingTimeIsOver,
+                      SizeConfig.blockSizeHorizontal * 3.6, colorBlack,
+                      weight: FontWeight.w500),
+                  SizedBox(
+                    height: SizeConfig.blockSizeVertical * 2,
+                  ),
+
+                ])),
+      ),
+    );
+  }
+
+  Future<void> backPressButton() async {
+    await agoraEngine.value.leaveChannel();
+    agoraEngine.value.release();
+    leave();
+    Get.delete<GoLiveController>();
+    Get.delete<ChatController>();
+    Get.delete<EventListingController>();
+    Get.back();
+    Get.to(() => EventListingScreen());
   }
 }

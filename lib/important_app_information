@@ -1,9 +1,15 @@
 
 // Agora Login Credentials
 
+// Local Agora
 https://console.agora.io/
 deepkumarss016@gmail.com
 Ds_160055@
+
+// Live Agora
+https://console.agora.io/
+streamecart@gmail.com
+Agora.streamecart2023
 
 
 // Figma Link
@@ -24,6 +30,10 @@ kamal@gmail.com - admin@123
 
 hostId:  HOST302195
 email: kulwinder@yopmail.com
+password: 123456
+
+hostId:  HOST222862
+email: testuser@yopmail.com
 password: 123456
 
 hostId:  HOST802440
@@ -52,8 +62,16 @@ https://api.postman.com/collections/7754873-b9267a28-2128-4f03-b237-21f7b2780cd4
 
 // Dummy key store for testing the release apk
 
-Path: streamEcart/android/app/Untitled
+Path: streamEcart/android/app/app_store.jks
 Key store password: 123456
 Key alias: key0
 Key alias password: 123456
-First and last name: stream cart
+First and last name: streamCart
+
+
+
+// Google Play Console account
+
+https://play.google.com/console/
+email: streamecart@gmail.com
+password: gmail.streamEcart2023

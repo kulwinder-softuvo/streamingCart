@@ -6,7 +6,7 @@ import 'package:stream_e_cart/event_listing/ui/event_listing_screen.dart';
 
 import '../../constants/storage_constants.dart';
 
-class FirstScreencontroller extends GetxController {
+class FirstScreenController extends GetxController {
   final storage = GetStorage();
 
   goLiveBtnClick() {

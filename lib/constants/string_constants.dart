@@ -31,7 +31,8 @@ const enterAValidEmailAddress = "Enter a valid email address";
 const enterYourPassword = "Enter your password";
 const somethingWentWrongConst = "Something went wrong.";
 const noInternetConnectionConst = "No internet connection";
-const areYouSureToLogotFromApp = "Are you sure to logout from the app?";
+const opsYourStreamingTimeIsOver = "Ops! your streaming time is over.";
+const areYouSureToLogoutFromApp = "Are you sure to logout from app?";
 const ok = "OK";
 const cancel = "CANCEL";
 const thisEventIsCompleted = "This event is completed.";
@@ -39,6 +40,7 @@ const thisEventIsNotLiveNow = "This event is not live now.";
 const chatIsNotStartedYet = "Chat is not started yet :(";
 const noProductIsAvailableForSale = "No product is available for sale.";
 const typeAMessage = "Type a message.";
+const goBack = "Go Back";
 
 // Font Family
 class FontFamily {

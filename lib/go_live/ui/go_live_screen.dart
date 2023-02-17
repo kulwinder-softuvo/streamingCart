@@ -5,7 +5,6 @@ import 'package:flutter_countdown_timer/index.dart';
 import 'package:stream_e_cart/common/size_config.dart';
 import 'package:stream_e_cart/constants/app_colors.dart';
 import 'package:stream_e_cart/constants/app_images.dart';
-import 'package:stream_e_cart/go_live/controller/chat_controller.dart';
 import 'package:stream_e_cart/go_live/controller/go_live_controller.dart';
 import 'package:stream_e_cart/go_live/ui/chat_screen.dart';
 import 'package:stream_e_cart/go_live/ui/productListScreen.dart';
@@ -32,12 +31,7 @@ class GoLiveScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        await controller.agoraEngine.value.leaveChannel();
-        controller.agoraEngine.value.release();
-        controller.leave();
-        Get.delete<GoLiveController>();
-        Get.delete<ChatController>();
-        Get.back();
+       controller.backPressButton();
         return Future.value(false);
       },
       child: Scaffold(
@@ -105,10 +99,15 @@ class GoLiveScreen extends StatelessWidget {
                   SizedBox(
                     width: SizeConfig.blockSizeHorizontal * 2,
                   ),
-                  Image.asset(
-                    close,
-                    width: SizeConfig.blockSizeHorizontal * 8,
-                    height: SizeConfig.blockSizeVertical * 8,
+                  InkWell(
+                    onTap: (){
+                      controller.backPressButton();
+                    },
+                    child: Image.asset(
+                      close,
+                      width: SizeConfig.blockSizeHorizontal * 8,
+                      height: SizeConfig.blockSizeVertical * 8,
+                    ),
                   ),
                   SizedBox(
                     width: SizeConfig.blockSizeHorizontal * 4,
@@ -157,10 +156,10 @@ class GoLiveScreen extends StatelessWidget {
                                   controller: controller.controller,
                                   widgetBuilder: (_, CurrentRemainingTime? time) {
                                     if (time == null) {
-                                      return const Text('Game over');
+                                      return const Text('Time over');
                                     }
                                     return headingText(
-                                        "${time.min}M ${time.sec}S LEFT",
+                                        "${time.min ?? 0}M ${time.sec}S LEFT",
                                         SizeConfig.blockSizeHorizontal * 3.7,
                                         colorWhite,
                                         weight: FontWeight.w500);
@@ -173,9 +172,7 @@ class GoLiveScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Positioned(
-                    bottom: 0.0,
-                    child: InkWell(
+               InkWell(
                       onTap: () {
                         controller.isBottomSheetOpen.value = true;
                         showModalBottomSheet(
@@ -201,7 +198,6 @@ class GoLiveScreen extends StatelessWidget {
                         ),
                       ),),
                     ),
-                  ),
                 ],
               ),
             ),
@@ -254,13 +250,14 @@ class GoLiveScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              Expanded(
-                  child: TabBarView(
-                children: [
-                  ChatScreen(controller.agoraChatRoomId.value),
-                  ProductListScreen(controller.eventId.value),
-                ],
-              ))
+              Flexible(
+                child: TabBarView(
+                  children: [
+                ChatScreen(controller.agoraChatRoomId.value),
+                ProductListScreen(controller.eventId.value),
+                  ],
+                ),
+              )
             ],
           ),
         ),
