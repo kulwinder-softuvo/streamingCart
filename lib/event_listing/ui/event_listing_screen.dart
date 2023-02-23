@@ -50,7 +50,7 @@ class EventListingScreen extends StatelessWidget {
                             SizedBox(
                               height: SizeConfig.blockSizeVertical * 3,
                             ),
-                            Obx(() => ListView.builder(
+                            Obx(() => controller.eventList.isNotEmpty ? ListView.builder(
                                   itemCount: controller.eventList.length,
                                   scrollDirection: Axis.vertical,
                                   shrinkWrap: true,
@@ -60,7 +60,14 @@ class EventListingScreen extends StatelessWidget {
                                     return showRowItem(
                                         controller.eventList[index], index);
                                   },
-                                )),
+                                ) : Container(
+                              height: SizeConfig.blockSizeVertical * 60 ,
+                                  child: Center(
+                                  child: headingText(noEventIsAvailable,
+                                  SizeConfig.blockSizeHorizontal * 4, colorGrey,
+                                  weight: FontWeight.w500),
+                      ),
+                                ),),
                           ],
                         ),
                       ),
@@ -166,7 +173,7 @@ class EventListingScreen extends StatelessWidget {
               child: ElevatedButton(
                   onPressed: () async {
                     showDebugPrint(
-                        "join hosting through this link ----->   ${"https://streamingweb.softuvo.click/?event_id=${eventList.id}"}");
+                        "join local hosting through this link ----->   ${"https://streamingweb.softuvo.click/?event_id=${eventList.id}"}");
 
                     controller.compareDatesForEventStatus(
                                 eventList.eventStartTime.toString(),

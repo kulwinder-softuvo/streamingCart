@@ -39,6 +39,7 @@ const thisEventIsCompleted = "This event is completed.";
 const thisEventIsNotLiveNow = "This event is not live now.";
 const chatIsNotStartedYet = "Chat is not started yet :(";
 const noProductIsAvailableForSale = "No product is available for sale.";
+const noEventIsAvailable = "No event is available.";
 const typeAMessage = "Type a message.";
 const goBack = "Go Back";
 

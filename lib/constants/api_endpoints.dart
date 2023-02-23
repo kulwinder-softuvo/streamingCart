@@ -1,7 +1,13 @@
 class APIEndpoints {
-  static const baseUrl = "https://streamecart.softuvo.click/api/"; // Local
-  static const imageBaseUrl =
-      "https://streamecart.softuvo.click/uploads/events/"; // Local
+ // static const baseUrl = "https://streamecart.softuvo.click/api/"; // Local
+ // static const imageBaseUrl = "https://streamecart.softuvo.click/uploads/events/"; // Local
+ // static const agoraBaseUrl = "https://agorastream.softuvo.click/"; // Local
+
+
+  static const baseUrl = "https://app.streamecart.com/api/"; // Live & staging
+  static const imageBaseUrl = "https://app.streamecart.com/uploads/events/"; // Live & staging
+  static const agoraBaseUrl = "https://api.streamecart.com/"; // Live
+
 
   //Local Agora Key Strings
 /*  static const agoraAppId = "917fd91f5e2149eea9c592c024b93475";
@@ -28,4 +34,6 @@ class APIEndpoints {
   static const logout = "logout";
   static const listEvents = "listevents";
   static const eventDetail = "event_detail";
+  static const generateToken = "generateToken";
+  static const generateChatToken = "generateChatToken";
 }

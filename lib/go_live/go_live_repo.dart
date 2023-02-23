@@ -50,12 +50,11 @@ class GoLiveRepo extends GetConnect {
     try {
       final result = await InternetAddress.lookup('google.com');
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-        final response = await post(
-            "https://agorastream.softuvo.click/generateChatToken",
+        final response = await post(APIEndpoints.agoraBaseUrl+APIEndpoints.generateChatToken,
               map);
 
         showDebugPrint(
-            "get chat token api url --->  https://agorastream.softuvo.click/generateChatToken");
+            "get chat token api url --->  ${APIEndpoints.agoraBaseUrl+APIEndpoints.generateChatToken}");
 
         if (response.statusCode == 200) {
           showDebugPrint(

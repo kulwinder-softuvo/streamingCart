@@ -36,7 +36,7 @@ class LoginRepo extends GetConnect {
           return LoginModel.fromJson(response.body);
         } else {
           return LoginModel(
-              code: response.statusCode, message: somethingWentWrongConst);
+              code: response.statusCode, message: response.statusText);
         }
       } else {
         return LoginModel(code: 502, message: noInternetConnectionConst);

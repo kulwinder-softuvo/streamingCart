@@ -61,7 +61,7 @@ class EventsRepo extends GetConnect {
     final result = await InternetAddress.lookup('google.com');
     if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
       final response =
-          await post('https://agorastream.softuvo.click/generateToken', map);
+          await post(APIEndpoints.agoraBaseUrl+APIEndpoints.generateToken, map);
       if (response.statusCode == 200) {
         showDebugPrint(
             "get agora token response----->  ${response.bodyString}");
