@@ -166,7 +166,10 @@ class ChatController extends GetxController {
           _addLogToConsole(
             "send message failed, code: ${e.code}, desc: ${e.description}",
           );
-          showMessage("Message failed \n${e.description}");
+          if(e.code == 500){
+            sendMessage();
+          }
+          //showMessage("Message failed \n${e.description}");
         },
       ));
       ChatClient.getInstance.chatManager.sendMessage(msg);
@@ -177,6 +180,7 @@ class ChatController extends GetxController {
     _logText.add("$_timeString: $log");
 
     showDebugPrint("message agora -----------------------   $log");
+
     // scrollController.jumpTo(scrollController.position.maxScrollExtent);
   }
 
