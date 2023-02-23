@@ -94,7 +94,7 @@ class EventListingScreen extends StatelessWidget {
               decoration: BoxDecoration(
                 image: DecorationImage(
                     colorFilter: ColorFilter.mode(
-                        Colors.black.withOpacity(0.4), BlendMode.darken),
+                        Colors.black.withOpacity(0.6), BlendMode.darken),
                     image: NetworkImage(
                         "${APIEndpoints.imageBaseUrl}${eventList.bannerImage}"),
                     fit: BoxFit.cover),
@@ -174,6 +174,9 @@ class EventListingScreen extends StatelessWidget {
                   onPressed: () async {
                     showDebugPrint(
                         "join local hosting through this link ----->   ${"https://streamingweb.softuvo.click/?event_id=${eventList.id}"}");
+
+                   showDebugPrint(
+                        "join live hosting through this link ----->   ${"https://web.streamecart.com/?event_id=${eventList.id}"}");
 
                     controller.compareDatesForEventStatus(
                                 eventList.eventStartTime.toString(),

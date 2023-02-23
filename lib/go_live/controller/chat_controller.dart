@@ -123,8 +123,8 @@ class ChatController extends GetxController {
         chatToken.value,
       );
       _addLogToConsole("login succeed, userId: $userId");
-     // joinChatRoom(agoraChatRoomId.value);
-      joinChatRoom("206800089579521");
+      joinChatRoom(agoraChatRoomId.value);
+      // joinChatRoom("206800089579521");
     } on ChatError catch (e) {
       _addLogToConsole("login failed, code: ${e.code}, desc: ${e.description}");
       //  getAgoraRegisterApi(agoraAppChatToken.value, userId.value);
@@ -142,13 +142,14 @@ class ChatController extends GetxController {
   }*/
 
   void sendMessage() async {
+    var firstAttempt = true;
     if (chatController.value.text == "") {
       _addLogToConsole("single chat id or message content is null");
       showMessage(typeAMessage);
       return;
     } else {
       var msg = ChatMessage.createTxtSendMessage(
-          targetId: "206800089579521",
+          targetId: agoraChatRoomId.value,
           content: chatController.value.text,
           chatType: ChatType.ChatRoom);
       msg.setMessageStatusCallBack(MessageStatusCallBack(
@@ -166,8 +167,9 @@ class ChatController extends GetxController {
           _addLogToConsole(
             "send message failed, code: ${e.code}, desc: ${e.description}",
           );
-          if(e.code == 500){
+          if(e.code == 500 && firstAttempt){
             sendMessage();
+            firstAttempt = false;
           }
           //showMessage("Message failed \n${e.description}");
         },

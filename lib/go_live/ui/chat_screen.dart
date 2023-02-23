@@ -20,27 +20,30 @@ class ChatScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: colorWhite,
-      body: Stack(
+      body: Column(
         children: [
-          SizedBox(
+          Container(
             height: SizeConfig.blockSizeVertical * 31,
-            child: Obx (() => controller.chatList.isNotEmpty ? ListView.builder(
-              controller: controller.scrollController.value,
-              itemCount: controller.chatList.length,
-              scrollDirection: Axis.vertical,
-              shrinkWrap: true,
-              primary: false,
-              itemBuilder: (context, index) {
-                return chatRowItem(controller.chatList[index], index);
-              },
+            child: Obx (() => controller.chatList.isNotEmpty ? SingleChildScrollView(
+              child: ListView.builder(
+                controller: controller.scrollController.value,
+                itemCount: controller.chatList.length,
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                primary: false,
+                itemBuilder: (context, index) {
+                  return chatRowItem(controller.chatList[index], index);
+                },
+              ),
             ) : Center(
               child: headingText(chatIsNotStartedYet ,   SizeConfig.blockSizeHorizontal * 4, colorGrey, weight: FontWeight.w500),
             ),
           ),),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
+
+          Container(
               height: SizeConfig.blockSizeVertical * 6.5,
               decoration: const BoxDecoration(
                   color: colorLightGreyBg,
@@ -88,7 +91,6 @@ class ChatScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                ),
               ),
             ),
           ),

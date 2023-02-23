@@ -182,8 +182,9 @@ class GoLiveScreen extends StatelessWidget {
                                 top: Radius.circular(45.0),
                               ),
                             ),
+                            isScrollControlled: true,
                             builder: (context) {
-                              return bottomSheetWidget();
+                              return bottomSheetWidget(context);
                             }).whenComplete(() {
                           controller.isBottomSheetOpen.value = false;
                         });
@@ -221,44 +222,48 @@ class GoLiveScreen extends StatelessWidget {
         : commonLoader());
   }
 
-  Widget bottomSheetWidget() {
-    return SizedBox(
-      height: SizeConfig.screenHeight / 2,
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: DefaultTabController(
-          length: 2,
-          child: Column(
-            children: [
-              TabBar(
-                indicatorColor: colorRed,
-                labelColor: colorRed,
-                unselectedLabelColor: textColor,
-                labelStyle: TextStyle(
-                    fontWeight: FontWeight.w700,
-                    fontFamily: FontFamily.poppins,
-                    color: colorRed,
-                    fontSize: SizeConfig.blockSizeHorizontal * 3.9),
-                indicatorSize: TabBarIndicatorSize.label,
-                indicatorWeight: 3,
-                tabs: const [
-                  Tab(
-                    text: chat,
-                  ),
-                  Tab(
-                    text: products,
-                  ),
-                ],
-              ),
-              Flexible(
-                child: TabBarView(
-                  children: [
-                ChatScreen(controller.agoraChatRoomId.value),
-                ProductListScreen(controller.eventId.value),
+  Widget bottomSheetWidget(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(
+          bottom: MediaQuery.of(context).viewInsets.bottom),
+      child: SizedBox(
+        height: SizeConfig.screenHeight / 2,
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: DefaultTabController(
+            length: 2,
+            child: Column(
+              children: [
+                TabBar(
+                  indicatorColor: colorRed,
+                  labelColor: colorRed,
+                  unselectedLabelColor: textColor,
+                  labelStyle: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontFamily: FontFamily.poppins,
+                      color: colorRed,
+                      fontSize: SizeConfig.blockSizeHorizontal * 3.9),
+                  indicatorSize: TabBarIndicatorSize.label,
+                  indicatorWeight: 3,
+                  tabs: const [
+                    Tab(
+                      text: chat,
+                    ),
+                    Tab(
+                      text: products,
+                    ),
                   ],
                 ),
-              )
-            ],
+                Expanded(
+                  child: TabBarView(
+                    children: [
+                  ChatScreen(controller.agoraChatRoomId.value),
+                  ProductListScreen(controller.eventId.value),
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),

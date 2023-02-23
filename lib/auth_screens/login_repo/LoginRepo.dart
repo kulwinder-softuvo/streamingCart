@@ -31,12 +31,13 @@ class LoginRepo extends GetConnect {
             "Login api url --->  ${APIEndpoints.baseUrl + APIEndpoints.login + params}");
 
         if (response.statusCode == 200) {
-          showDebugPrint("get Login response----->  ${response.bodyString}");
+          showDebugPrint("get Login response----->  ${response.body}");
 
           return LoginModel.fromJson(response.body);
         } else {
+          showDebugPrint("get Login response----->  ${response.body.message}");
           return LoginModel(
-              code: response.statusCode, message: response.statusText);
+              code: response.statusCode, message: response.body.message);
         }
       } else {
         return LoginModel(code: 502, message: noInternetConnectionConst);
