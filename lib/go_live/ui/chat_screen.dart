@@ -13,8 +13,9 @@ import '../../constants/string_constants.dart';
 class ChatScreen extends StatelessWidget {
   var controller = Get.put(ChatController());
 
-  ChatScreen(String chatRoomId, {super.key}){
+  ChatScreen(String chatRoomId, String chatUsername, {super.key}){
     controller.agoraChatRoomId.value = chatRoomId;
+    controller.chatUsername.value = chatUsername;
   }
 
   @override
@@ -107,7 +108,7 @@ class ChatScreen extends StatelessWidget {
           Row(
     children: [
           Container(
-            width: SizeConfig.blockSizeHorizontal * 28,
+            width: SizeConfig.blockSizeHorizontal * 25,
             child: headingText(" ${
                 chatList.name.toString()} : ",
                 SizeConfig.blockSizeHorizontal * 3.8,
@@ -133,8 +134,7 @@ class ChatScreen extends StatelessWidget {
     ],
           ),
     Divider(),
-    SizedBox(
-    height: SizeConfig.blockSizeVertical * 1,),
+
         ],
       ),
     );

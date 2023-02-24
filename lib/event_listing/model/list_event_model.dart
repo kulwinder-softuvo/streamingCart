@@ -43,6 +43,7 @@ class Events {
   String? videoLink;
   String? channelName;
   String? bannerImage;
+  String? chatUsername;
   int? status;
   int? isPublished;
   String? chatRoomId;
@@ -63,6 +64,7 @@ class Events {
       this.bannerImage,
       this.status,
       this.isPublished,
+        this.chatUsername,
       this.chatRoomId});
 
   Events.fromJson(Map<String, dynamic> json) {
@@ -80,6 +82,7 @@ class Events {
     channelName = json['channel_name'].toString().toStringConversion();
     bannerImage = json['banner_image'].toString().toStringConversion();
     status = json['status'].toString().toIntConversion();
+    chatUsername = json['chat_username'].toString().toStringConversion();
     isPublished = json['is_published'].toString().toIntConversion();
     chatRoomId = json['chat_room_id'].toString().toStringConversion();
   }
@@ -101,6 +104,7 @@ class Events {
     data['banner_image'] = bannerImage;
     data['status'] = status;
     data['is_published'] = isPublished;
+    data['chat_username'] = chatUsername;
     data['chat_room_id'] = chatRoomId;
     return data;
   }

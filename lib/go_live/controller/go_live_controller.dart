@@ -19,6 +19,7 @@ class GoLiveController extends GetxController {
   var eventId = "".obs;
   var audienceToken = "".obs;
   var agoraChatRoomId = "".obs;
+  var chatUsername = "".obs;
   var showLoader = false.obs;
   var uid = "0".obs; // uid of the local user
   var remoteUid = "".obs; // uid of the remote user

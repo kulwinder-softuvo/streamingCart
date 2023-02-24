@@ -21,6 +21,7 @@ class ChatController extends GetxController {
   var chatToken = "".obs;
   var agoraAppChatToken = "".obs;
   var agoraChatRoomId = "".obs;
+  var chatUsername = "".obs;
 
   var scrollController = ScrollController().obs;
   final List<String> _logText = [];
@@ -29,7 +30,7 @@ class ChatController extends GetxController {
   @override
   void onInit() {
 
-    getChatTokenApi(userId.value);
+    getChatTokenApi(chatUsername.value);
     initAgoraChatSDK();
     super.onInit();
   }
@@ -119,7 +120,7 @@ class ChatController extends GetxController {
   void signInToAgora(String userId) async {
     try {
       await ChatClient.getInstance.loginWithAgoraToken(
-        userId,
+        chatUsername.value,
         chatToken.value,
       );
       _addLogToConsole("login succeed, userId: $userId");
@@ -142,6 +143,7 @@ class ChatController extends GetxController {
   }*/
 
   void sendMessage() async {
+    showDebugPrint("Room id-------->  ${agoraChatRoomId.value}");
     var firstAttempt = true;
     if (chatController.value.text == "") {
       _addLogToConsole("single chat id or message content is null");

@@ -36,6 +36,7 @@ class EventDetail {
     title = json['title'].toString().toStringConversion();
     eventDesc = json['event_desc'].toString().toStringConversion();
     channelName = json['channel_name'].toString().toStringConversion();
+
     if (json['products'] != null) {
       products = <Products>[];
       json['products'].forEach((v) {
@@ -50,6 +51,7 @@ class EventDetail {
     data['title'] = title;
     data['event_desc'] = eventDesc;
     data['channel_name'] = channelName;
+
     if (products != null) {
       data['products'] = products!.map((v) => v.toJson()).toList();
     }

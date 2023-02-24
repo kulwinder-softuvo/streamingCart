@@ -92,7 +92,7 @@ String audienceToken ="";
           Get.to(() =>
               GoLiveScreen(
                   value.rtcTokenUID.toString(), userId, events.id.toString(),
-                  events.channelName.toString(), audienceToken, events.chatRoomId.toString()));
+                  events.channelName.toString(), audienceToken, events.chatRoomId.toString(), events.chatUsername.toString()));
         } else {
           showMessage("Token not found.");
         }
