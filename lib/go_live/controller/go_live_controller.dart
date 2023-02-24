@@ -144,7 +144,28 @@ class GoLiveController extends GetxController {
                       SizeConfig.blockSizeHorizontal * 3.6, colorBlack,
                       weight: FontWeight.w500),
                   SizedBox(
-                    height: SizeConfig.blockSizeVertical * 2,
+                    height: SizeConfig.blockSizeVertical * 4,
+                  ),
+                  Center(
+                    child: ElevatedButton(
+                        onPressed: () {
+                          backPressButton();
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: colorRed,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          elevation: 15.0,
+                        ),
+                        child: SizedBox(
+                            width: SizeConfig.screenWidth / 5,
+                            height: SizeConfig.blockSizeVertical * 4,
+                            child: Center(
+                                child: headingText(
+                                    ok,
+                                    SizeConfig.blockSizeHorizontal * 4,
+                                    colorWhite)))),
                   ),
 
                 ])),

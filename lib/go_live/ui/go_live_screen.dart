@@ -254,7 +254,7 @@ class GoLiveScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                Expanded(
+                Flexible(
                   child: TabBarView(
                     children: [
                   ChatScreen(controller.agoraChatRoomId.value),
