@@ -102,30 +102,40 @@ class ChatScreen extends StatelessWidget {
   Widget chatRowItem(ChatModel chatList, int index) {
     return Padding(
       padding: const EdgeInsets.only(left: 15.0, right: 15.0),
-      child: Row(
+      child: Column(
+        children: [
+          Row(
     children: [
-      headingText(
-          chatList.name.toString(),
-          SizeConfig.blockSizeHorizontal * 3.8,
-          chatList.color,
-          weight: FontWeight.w600),
-      SizedBox(
-        width: SizeConfig.blockSizeHorizontal * 3,
-      ),
-      Expanded(
-        child: Text(
-          chatList.message.toString(),
-          style: TextStyle(
-              fontWeight: FontWeight.w400,
-              fontFamily: FontFamily.poppins,
-              color: textColor,
-              fontSize: SizeConfig.blockSizeHorizontal * 3.8),
-        ),
-      ),
-      SizedBox(
-        height: SizeConfig.blockSizeVertical * 5,
-      ),
+          Container(
+            width: SizeConfig.blockSizeHorizontal * 28,
+            child: headingText(" ${
+                chatList.name.toString()} : ",
+                SizeConfig.blockSizeHorizontal * 3.8,
+                chatList.color,
+                weight: FontWeight.w600),
+          ),
+          SizedBox(
+            width: SizeConfig.blockSizeHorizontal * 3,
+          ),
+          Expanded(
+            child: Text(
+              chatList.message.toString(),
+              style: TextStyle(
+                  fontWeight: FontWeight.w400,
+                  fontFamily: FontFamily.poppins,
+                  color: textColor,
+                  fontSize: SizeConfig.blockSizeHorizontal * 3.8),
+            ),
+          ),
+          SizedBox(
+            height: SizeConfig.blockSizeVertical * 5,
+          ),
     ],
+          ),
+    Divider(),
+    SizedBox(
+    height: SizeConfig.blockSizeVertical * 1,),
+        ],
       ),
     );
   }

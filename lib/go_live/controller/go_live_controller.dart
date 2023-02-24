@@ -149,7 +149,7 @@ class GoLiveController extends GetxController {
                   Center(
                     child: ElevatedButton(
                         onPressed: () {
-                          backPressButton();
+                          Get.back();
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: colorRed,
