@@ -36,6 +36,36 @@
       <excludeFolder url="file://$MODULE_DIR$/windows/flutter/ephemeral/.plugin_symlinks/agora_rtc_engine/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/windows/flutter/ephemeral/.plugin_symlinks/agora_rtc_engine/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/windows/flutter/ephemeral/.plugin_symlinks/agora_rtc_engine/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/agora_chat_sdk/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/agora_chat_sdk/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/agora_chat_sdk/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/permission_handler_apple/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/permission_handler_apple/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/permission_handler_apple/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/path_provider_foundation/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/path_provider_foundation/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/path_provider_foundation/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/path_provider_foundation/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/path_provider_foundation/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/path_provider_foundation/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/agora_chat_sdk/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/agora_chat_sdk/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/agora_chat_sdk/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/agora_rtc_engine/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/agora_rtc_engine/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/agora_rtc_engine/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/agora_rtc_engine/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/agora_rtc_engine/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/agora_rtc_engine/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/iris_event/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/iris_event/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/iris_event/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/iris_event/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/iris_event/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/iris_event/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/permission_handler_apple/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/permission_handler_apple/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/permission_handler_apple/.pub" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
