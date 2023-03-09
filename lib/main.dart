@@ -3,9 +3,9 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:stream_e_cart/constants/app_colors.dart';
 import 'auth_screens/ui/first_screen.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  await Future.delayed(const Duration(milliseconds: 300));
   runApp(GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(

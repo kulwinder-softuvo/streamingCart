@@ -65,7 +65,7 @@ https://docs.google.com/document/d/1gBcInUCyFxpYf36RjZqU7dv8gsw10waM0wIeJUmJRnY/
 https://api.postman.com/collections/7754873-b9267a28-2128-4f03-b237-21f7b2780cd4?access_key=PMAT-01GQMJRM610QEEVMVX76MW35H8
 
 
-// Dummy key store for testing the release apk
+// key store for testing the release apk
 
 Path: streamEcart/android/app/app_store.jks
 Key store password: 123456
