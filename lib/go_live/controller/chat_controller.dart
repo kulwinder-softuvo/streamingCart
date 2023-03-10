@@ -29,7 +29,6 @@ class ChatController extends GetxController {
 
   @override
   void onInit() {
-
     getChatTokenApi(chatUsername.value);
     initAgoraChatSDK();
     super.onInit();
@@ -59,11 +58,13 @@ class ChatController extends GetxController {
             _addLogToConsole(
               "receive text message: ${body.content}, from: ${msg.from}",
             );
-            chatList.add(
-                ChatModel(msg.from.toString(), body.content, colorYellow));
+            chatList
+                .add(ChatModel(msg.from.toString(), body.content, colorYellow));
             chatList.refresh();
-            Timer(const Duration(milliseconds: 500), () => scrollController.value.jumpTo(scrollController.value.position.maxScrollExtent));
-
+            Timer(
+                const Duration(milliseconds: 500),
+                () => scrollController.value
+                    .jumpTo(scrollController.value.position.maxScrollExtent));
           }
           break;
         case MessageType.IMAGE:
@@ -154,7 +155,36 @@ class ChatController extends GetxController {
           targetId: agoraChatRoomId.value,
           content: chatController.value.text,
           chatType: ChatType.ChatRoom);
-      msg.setMessageStatusCallBack(MessageStatusCallBack(
+
+      ChatClient.getInstance.chatManager.addMessageEvent(
+          "UNIQUE_HANDLER_ID",
+          ChatMessageEvent(
+            onSuccess: (msgId, msg) {
+              _addLogToConsole("send message: ${chatController.value.text}");
+              ChatTextMessageBody body = msg.body as ChatTextMessageBody;
+              chatList
+                  .add(ChatModel(store.read(userName), body.content, colorRed));
+              chatList.refresh();
+              chatController.clear();
+              Timer(
+                  const Duration(milliseconds: 500),
+                  () => scrollController.value
+                      .jumpTo(scrollController.value.position.maxScrollExtent));
+            },
+            onProgress: (msgId, progress) {
+              _addLogToConsole("send message succeed");
+            },
+            onError: (msgId, msg, error) {
+              _addLogToConsole(
+                "send message failed, code: ${error.code}, desc: ${error.description}",
+              );
+              if (error.code == 500 && firstAttempt) {
+                sendMessage();
+                firstAttempt = false;
+              }
+            },
+          ));
+      /*   msg.setMessageStatusCallBack.MessageStatusCallBack(
         onSuccess: () {
           _addLogToConsole("send message: ${chatController.value.text}");
           ChatTextMessageBody body = msg.body as ChatTextMessageBody;
@@ -175,7 +205,7 @@ class ChatController extends GetxController {
           }
           //showMessage("Message failed \n${e.description}");
         },
-      ));
+      );*/
       ChatClient.getInstance.chatManager.sendMessage(msg);
     }
   }
