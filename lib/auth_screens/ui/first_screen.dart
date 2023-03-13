@@ -56,7 +56,7 @@ class FirstScreen extends StatelessWidget {
                       elevation: 15.0
                     ),
                     child: SizedBox(
-                        width: SizeConfig.screenWidth / 1.5,
+                        width: 80,
                         height: SizeConfig.blockSizeVertical * 6,
                         child: Center(
                             child: headingText(
