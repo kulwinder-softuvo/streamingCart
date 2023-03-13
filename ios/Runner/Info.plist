@@ -25,11 +25,11 @@
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-    <string>Stream ECart requires access to the photo library.</string>
-    <key>NSMicrophoneUsageDescription</key>
-    <string>Stream ECart require access to the microphone.</string>
-    <key>NSCameraUsageDescription</key>
-    <string>Stream ECart requires access to the camera.</string>
+	<string>Stream ECart requires access to the photo library.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Stream ECart require access to the microphone while using the live streaming</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Stream ECart requires access to the camera for starting live streaming</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
